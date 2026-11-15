@@ -1,4 +1,6 @@
-# 30-Minute Talk Topic List — OpenGIS Standards + Open-Weight LLMs for Local Government GIS
+# Trust but Verify: LLM-Assisted GIS Data QC
+
+## 30-Minute Talk Topic List — OpenGIS Standards + Open-Weight LLMs for Local Government GIS
 
 **Audience:** municipal, county, and state GIS professionals
 **Constraints:** open-weight LLMs only (Hugging Face Hub / equivalent); no proprietary APIs; free/open data; reproducible on laptop / modest VM / on-prem.
