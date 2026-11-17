@@ -4,6 +4,7 @@
 
 **Audience:** municipal, county, and state GIS professionals
 **Constraints:** open-weight LLMs only (Hugging Face Hub / equivalent); no proprietary APIs; free/open data; reproducible on laptop / modest VM / on-prem.
+**Selected topic:** #10 — LLM-Assisted, Deterministic-Gated Data QC
 
 ## Topic Table (8–10 Rows)
 
