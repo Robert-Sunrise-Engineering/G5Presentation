@@ -1,0 +1,61 @@
+reading subset...
+reading full layer...
+
+full layer                  : 68,965
+full, PARCEL_CITY=Kanarraville: 508
+Kanarraville_Parcels subset : 475
+subset OIDs also in city set : 14 / 475
+(PARCEL_ID, geometry) groups where counts differ: 22
+  rows in city set not represented in subset: 33
+  rows in subset not in city set            : 0
+
+--- Boundary relationship ---
+all PARCEL_CITY=Kanarraville rows: {'within': 474, 'intersects (partial)': 34, 'outside': 0}
+Kanarraville_Parcels subset     : {'within': 474, 'intersects (partial)': 1, 'outside': 0}
+
+[county layer, PARCEL_CITY=Kanarraville] rows=508
+  rows with duplicated PARCEL_ID   : 362 (71.3%)
+  distinct PARCEL_ID               : 266
+  blank PARCEL_ID                  : 9
+  rows with duplicated geometry    : 354 (69.7%)
+  building data present            : 83.7%
+  address present                  : 79.3%
+  median PARCEL_ACRES              : 0.460
+  acreage within 10% of geometry   : 90.5% (n=496)
+  acreage within 25% of geometry   : 95.8%
+  acreage >25% off (>=0.05 ac)     : 4.2% (n=496)
+  property classes                  : 9
+  top classes                      : {'Residential': 453, 'Tax Exempt - Government': 15, 'Greenbelt': 14, 'Agricultural': 4}
+
+[Kanarraville_Parcels subset] rows=475
+  rows with duplicated PARCEL_ID   : 342 (72.0%)
+  distinct PARCEL_ID               : 251
+  blank PARCEL_ID                  : 5
+  rows with duplicated geometry    : 338 (71.2%)
+  building data present            : 85.1%
+  address present                  : 80.6%
+  median PARCEL_ACRES              : 0.460
+  acreage within 10% of geometry   : 91.6% (n=467)
+  acreage within 25% of geometry   : 96.8%
+  acreage >25% off (>=0.05 ac)     : 3.2% (n=467)
+  property classes                  : 9
+  top classes                      : {'Residential': 429, 'Tax Exempt - Government': 12, 'Greenbelt': 12, 'Agricultural': 4}
+
+--- Which attributes vary within duplicate-ID groups (subset) ---
+duplicate-ID groups: 123
+  BLDG_SQFT                varies in 121 groups
+  CONST_MATERIAL           varies in 121 groups
+  EFFBUILT_YR              varies in 115 groups
+  BUILT_YR                 varies in  75 groups
+  FLOORS_CNT               varies in   2 groups
+
+Example duplicate group rows:
+PARCEL_ID = A-0646-0001-0000  (7 rows)
+ oid        PARCEL_ID SERIAL_NUM  PARCEL_ACRES  TOTAL_MKT_VALUE  LAND_MKT_VALUE  BLDG_SQFT HOUSE_CNT  BUILT_YR    PARCEL_ADD
+ 374 A-0646-0001-0000    0016854          0.45         361183.0         58923.0     1322.0         7    1970.0 280 S MAIN ST
+ 375 A-0646-0001-0000    0016854          0.45         361183.0         58923.0      576.0         7    1996.0 280 S MAIN ST
+ 376 A-0646-0001-0000    0016854          0.45         361183.0         58923.0       64.0         7    1970.0 280 S MAIN ST
+ 377 A-0646-0001-0000    0016854          0.45         361183.0         58923.0      320.0         7    1970.0 280 S MAIN ST
+ 378 A-0646-0001-0000    0016854          0.45         361183.0         58923.0       96.0         7    1970.0 280 S MAIN ST
+ 379 A-0646-0001-0000    0016854          0.45         361183.0         58923.0     1120.0         7    2013.0 280 S MAIN ST
+ 380 A-0646-0001-0000    0016854          0.45         361183.0         58923.0     1283.0         7    1996.0 280 S MAIN ST

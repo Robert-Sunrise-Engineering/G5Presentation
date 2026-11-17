@@ -1,0 +1,50 @@
+Pass 1: 475 features read in 0.5s
+
+--- Geometry basics ---
+null geometry                  : 0
+zero-area geometry             : 0
+area < 1 m2                    : 0
+area < 10 m2                   : 0
+multipart features             : 0
+part-count distribution        : {1: 475}
+point-count percentiles        : {0.5: 6.0, 0.9: 11.0, 0.99: 24.0, 0.999: 79.0}
+max vertices in one feature    : 117
+features with >5000 vertices   : 0
+
+--- Exact duplicate geometry (identical WKB) ---
+rows in duplicate-geometry groups : 338
+distinct duplicate geometries     : 122
+largest identical-geometry group  : 7
+
+--- Identifier integrity ---
+blank PARCEL_ID                   : 5
+rows with duplicated PARCEL_ID    : 342
+PARCEL_ID groups with >1 row      : 123
+duplicate-ID groups               : 123
+  ...all rows identical geometry  : 120
+  ...multiple distinct geometries : 3
+  ...group size distribution      : {2: 62, 3: 38, 4: 16, 5: 3, 6: 3, 7: 1}
+  ...largest group                : 7 rows
+
+SERIAL_NUM groups with >1 row     : 123
+  ...with >1 distinct PARCEL_ID   : 0
+  ...with >1 distinct geometry    : 3
+  ...largest serial group         : 7 rows
+
+--- Area vs PARCEL_ACRES ---
+n compared                        : 467
+acres-derived-area / WebMerc area : p1=0.517 p50=0.615 p99=1.025
+ratio within 5% of 1.0 (acres from WebMercator) : 0.6%
+ratio within 5% of 0.626 (acres geodesic-correct): 86.1%
+
+--- CheckGeometry ---
+CheckGeometry ran in 0.4s; problems: 0
+
+--- Projected (NAD83 Conus Albers, EPSG:5070) area ---
+Project+read in 0.9s; projected zero-area: 0
+acres-derived-area / Albers area  : p1=0.824 p50=0.980 p99=1.633
+ratio within 5% of 1.0 (acres equal-area-correct): 73.0%
+WebMerc area / Albers area        : p50=1.593 (expected ~1.60 at this latitude)
+
+Total elapsed: 2.0s
+Scratch dir: C:\Users\user\AppData\Local\Temp\iron_qc_pfr688_m

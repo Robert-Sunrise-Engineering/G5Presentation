@@ -1,0 +1,13 @@
+validating...
+validated in 0.4s
+overlap error polygons: 357
+identical geometry                     n=   357  median=  3,119.0  max=      30,801.8  sum=     1,656,558.4
+same PARCEL_ID, different geometry     n=0
+different PARCEL_ID                    n=0
+blank PARCEL_ID involved               n=0
+
+Top 15 cross-parcel overlaps:
+
+Cross-parcel overlap count by class pair (top 10):
+
+elapsed 4.5s  scratch=C:\Users\user\AppData\Local\Temp\iron_topo_321ru1ib

@@ -1,0 +1,92 @@
+boundary classification: {'within': 474, 'partial': 34}
+
+--- Tax district counts ---
+TAX_DISTRICT
+03     495
+NaN     12
+10       1
+
+Rows with TAX_DISTRICT other than 03:
+ oid        PARCEL_ID TAX_DISTRICT PROP_CLASS  PARCEL_ACRES  geom_acres PARCEL_ADD boundary
+  67                           NaN        NaN           NaN    1.162300        NaN   within
+ 110                           NaN        NaN           NaN    0.337782        NaN  partial
+ 345          0492542          NaN        NaN           NaN    0.217238        NaN   within
+ 346          0418126          NaN        NaN           NaN    0.526671        NaN   within
+ 371          0016912          NaN        NaN           NaN    0.343882 85 W 200 S   within
+ 429 E-0337-0002-00R1           10  Greenbelt         10.11    0.885208        NaN  partial
+ 440                           NaN        NaN           NaN    0.125916        NaN   within
+ 478                           NaN        NaN           NaN   15.151398        NaN  partial
+ 495                           NaN        NaN           NaN    1.204430        NaN   within
+ 496                           NaN        NaN           NaN    2.583373        NaN   within
+ 497                           NaN        NaN           NaN   12.248524        NaN   within
+ 498                           NaN        NaN           NaN    7.025896        NaN  partial
+ 499                           NaN        NaN           NaN   11.769289        NaN  partial
+
+--- The big acreage outlier group ---
+
+A-0714-0000-0000 (3 rows)
+ oid TAX_DISTRICT  PROP_CLASS  PARCEL_ACRES  geom_acres     ratio PARCEL_ADD boundary
+  23           03 Residential           4.7    0.484912  9.692475        NaN   within
+  24           03 Residential           4.7    0.051907 90.546079        NaN  partial
+ 465           03 Residential           4.7    4.022877  1.168318        NaN   within
+
+A-0714-0001-0000 (3 rows)
+ oid TAX_DISTRICT              PROP_CLASS  PARCEL_ACRES  geom_acres     ratio PARCEL_ADD boundary
+  21           03 Tax Exempt - Government        15.547   10.575236  1.470133        NaN   within
+  22           03 Tax Exempt - Government        15.547    0.982602 15.822274        NaN  partial
+ 466           03 Tax Exempt - Government        15.547    1.963015  7.919959        NaN   within
+
+--- Duplicate-ID groups with more than one geometry ---
+                  n  n_geom
+PARCEL_ID                  
+A-0640-0002-0000  2       2
+A-0647-0647-000N  6       2
+A-0714-0000-0000  3       3
+A-0714-0001-0000  3       3
+
+A-0640-0002-0000  rows=2  unique_geoms=2  stated_acres=1.8  unique_geom_acres=1.533
+ oid  PARCEL_ACRES  geom_acres PARCEL_ADD boundary
+ 334           1.8    0.574208        NaN  partial
+ 477           1.8    0.958670        NaN   within
+
+A-0647-0647-000N  rows=6  unique_geoms=2  stated_acres=0.475  unique_geom_acres=0.966
+ oid  PARCEL_ACRES  geom_acres PARCEL_ADD boundary
+ 377         0.475    0.483476        NaN   within
+ 378         0.475    0.483476        NaN   within
+ 379         0.475    0.483476        NaN   within
+ 481         0.475    0.482880        NaN   within
+ 482         0.475    0.482880        NaN   within
+ 483         0.475    0.482880        NaN   within
+
+A-0714-0000-0000  rows=3  unique_geoms=3  stated_acres=4.7  unique_geom_acres=4.560
+ oid  PARCEL_ACRES  geom_acres PARCEL_ADD boundary
+  23           4.7    0.484912        NaN   within
+  24           4.7    0.051907        NaN  partial
+ 465           4.7    4.022877        NaN   within
+
+A-0714-0001-0000  rows=3  unique_geoms=3  stated_acres=15.547  unique_geom_acres=13.521
+ oid  PARCEL_ACRES  geom_acres PARCEL_ADD boundary
+  21        15.547   10.575236        NaN   within
+  22        15.547    0.982602        NaN  partial
+ 466        15.547    1.963015        NaN   within
+
+--- Boundary-straddling (partial) rows ---
+count: 34
+ oid        PARCEL_ID TAX_DISTRICT              PROP_CLASS  PARCEL_ACRES  PARCEL_ADD
+  22 A-0714-0001-0000           03 Tax Exempt - Government        15.547         NaN
+  24 A-0714-0000-0000           03             Residential         4.700         NaN
+  69 A-0729-0000-0000           03               Greenbelt         0.388         NaN
+  99 A-0729-0003-0000           03             Residential         0.610 177 E 500 N
+ 101 A-0729-0003-0000           03             Residential         0.610 177 E 500 N
+ 102 A-0729-0003-0000           03             Residential         0.610 177 E 500 N
+ 103 A-0724-0003-0000           03               Greenbelt         8.460         NaN
+ 110                           NaN                     NaN           NaN         NaN
+ 151 A-0724-0002-0000           03             Residential         4.570 270 E 100 S
+ 156 A-0704-0706-0000           03             Residential         1.400         NaN
+ 219 A-0724-0001-0005           03             Residential         0.510         NaN
+ 324 A-0713-0000-0000           03             Residential         3.600  76 N 300 E
+
+blank IDs among partial : 4
+no assessor data among partial: 4
+building data among partial  : 21 / 34
+building data among within   : 404 / 474

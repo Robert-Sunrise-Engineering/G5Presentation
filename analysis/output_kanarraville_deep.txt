@@ -1,0 +1,211 @@
+
+Exact duplicate records (all attributes + geometry): 1
+  ...rows involved in exact-duplicate sets         : 2
+
+--- Duplicate PARCEL_ID group semantics ---
+duplicate-ID groups: 123
+  exact duplicates (same geom, same attrs) : 0 groups, 0 rows
+  same attrs, different geometry (multipart): 0 groups, 0 rows
+  different attributes                      : 123 groups, 342 rows
+
+Top 10 largest PARCEL_ID groups:
+
+  ID='A-0646-0001-0000'  rows=7  distinct_geom=1  distinct_attrs=7
+    PROP_CLASS    : ['Residential']
+    TAX_DISTRICT  : ['03']
+    PARCEL_ADD    : ['280 S MAIN ST']
+    SUBDIV_NAME   : ['KANARRA TOWN SURVEY BLK 05']
+    PARCEL_ACRES  : ['0.45']
+
+  ID='A-0640-0001-0000'  rows=6  distinct_geom=1  distinct_attrs=6
+    PROP_CLASS    : ['Residential']
+    TAX_DISTRICT  : ['03']
+    PARCEL_ADD    : ['345 S MAIN ST']
+    SUBDIV_NAME   : ['KANARRA TOWN SURVEY BLK 01']
+    PARCEL_ACRES  : ['0.9']
+
+  ID='A-0647-0647-000N'  rows=6  distinct_geom=2  distinct_attrs=6
+    PROP_CLASS    : ['Residential']
+    TAX_DISTRICT  : ['03']
+    PARCEL_ADD    : []
+    SUBDIV_NAME   : ['KANARRA TOWN SURVEY BLK 05']
+    PARCEL_ACRES  : ['0.475']
+
+  ID='A-0739-0002-0003'  rows=6  distinct_geom=1  distinct_attrs=6
+    PROP_CLASS    : ['Residential']
+    TAX_DISTRICT  : ['03']
+    PARCEL_ADD    : ['125 N 200 W']
+    SUBDIV_NAME   : []
+    PARCEL_ACRES  : ['2.399']
+
+  ID='A-0660-0000-0000'  rows=5  distinct_geom=1  distinct_attrs=5
+    PROP_CLASS    : ['Residential']
+    TAX_DISTRICT  : ['03']
+    PARCEL_ADD    : ['110 S 100 W']
+    SUBDIV_NAME   : ['KANARRA TOWN SURVEY BLK 09']
+    PARCEL_ACRES  : ['0.45']
+
+  ID='A-0736-0002-0000'  rows=5  distinct_geom=1  distinct_attrs=5
+    PROP_CLASS    : ['Residential']
+    TAX_DISTRICT  : ['03']
+    PARCEL_ADD    : ['361 E 200 N']
+    SUBDIV_NAME   : []
+    PARCEL_ACRES  : ['1.0']
+
+  ID='A-0724-0001-0003'  rows=5  distinct_geom=1  distinct_attrs=5
+    PROP_CLASS    : ['Residential']
+    TAX_DISTRICT  : ['03']
+    PARCEL_ADD    : ['319 E 100 S']
+    SUBDIV_NAME   : []
+    PARCEL_ACRES  : ['0.51']
+
+  ID='A-0696-0000-0000'  rows=4  distinct_geom=1  distinct_attrs=4
+    PROP_CLASS    : ['Residential']
+    TAX_DISTRICT  : ['03']
+    PARCEL_ADD    : ['62 N 100 E']
+    SUBDIV_NAME   : ['KANARRA TOWN SURVEY BLK 20']
+    PARCEL_ACRES  : ['0.94']
+
+  ID='A-0665-0001-0001'  rows=4  distinct_geom=1  distinct_attrs=4
+    PROP_CLASS    : ['Residential']
+    TAX_DISTRICT  : ['03']
+    PARCEL_ADD    : ['85 E 100 S']
+    SUBDIV_NAME   : ['KANARRA TOWN SURVEY BLK 12']
+    PARCEL_ACRES  : ['0.45']
+
+  ID='A-0661-0000-0000'  rows=4  distinct_geom=1  distinct_attrs=4
+    PROP_CLASS    : ['Residential']
+    TAX_DISTRICT  : ['03']
+    PARCEL_ADD    : ['140 S 100 W']
+    SUBDIV_NAME   : ['KANARRA TOWN SURVEY BLK 09']
+    PARCEL_ACRES  : ['0.45']
+
+--- Rows sharing identical geometry, by property class ---
+PROP_CLASS
+Residential                       331
+Greenbelt                           3
+Agricultural                        2
+Commercial - Apartment & Condo      2
+
+--- Duplicate-geometry group semantics ---
+duplicate-geometry groups          : 122  rows=338
+  ...single PARCEL_ID in group     : 122  rows=338
+  ...multiple PARCEL_IDs in group  : 0  rows=0
+  ...non-geometry attrs identical  : 0  rows=0
+  ...stated acres differ           : 0
+
+Rows in multi-PID duplicate-geometry groups, by class:
+Series([], )
+
+Examples of multi-PID shared geometry:
+
+--- Placeholder / suspicious IDs ---
+blank                       : 5
+all 9s                      : 0
+all 0s                      : 0
+7-digit numeric (any)       : 3
+7-digit, not all 0/9        : 3
+
+--- Rows with blank PARCEL_ID ---
+count=5
+PROP_CLASS
+<null>    5
+distinct geometry=5  exact-dup rows=0
+sample:
+PARCEL_ID SERIAL_NUM PROP_CLASS PARCEL_ADD  PARCEL_ACRES
+                 NaN        NaN        NaN           NaN
+                 NaN        NaN        NaN           NaN
+                 NaN        NaN        NaN           NaN
+                 NaN        NaN        NaN           NaN
+                 NaN        NaN        NaN           NaN
+
+--- Acreage consistency (equal-area geometry) ---
+n=467
+ratio percentiles: {0.01: 0.824, 0.05: 0.927, 0.25: 0.969, 0.5: 0.98, 0.75: 1.004, 0.95: 1.146, 0.99: 1.633}
+
+acres >= 0.05 (n=467): within 10% of geometry = 91.6%, within 25% = 96.8%
+severe mismatch (>25% off, n=18) by class:
+PROP_CLASS
+Residential                13
+Tax Exempt - Government     2
+Greenbelt                   2
+Agricultural                1
+mismatch buckets: {'stated >100x geometry': 0, 'stated 10-100x geometry': 0, 'stated 2-10x geometry': 3, 'stated 1.25-2x geometry': 10, 'stated 0.5-0.8x geometry': 5, 'stated <0.5x geometry': 0}
+stated >=0.05 ac but geometry <0.01 ac : 0
+
+Top 15 overstatements (stated acres >> geometry):
+       PARCEL_ID  PARCEL_ACRES  geom_acres  stated/geom  parts              PROP_CLASS      PARCEL_ADD
+A-0714-0000-0000         4.700       0.485     9.692475      1             Residential             NaN
+A-0714-0001-0000        15.547       1.963     7.919959      1 Tax Exempt - Government             NaN
+A-0729-0002-0002         0.988       0.491     2.011291      1             Residential     116 E 500 N
+A-0640-0002-0000         1.800       0.959     1.877602      1             Residential             NaN
+A-0739-0001-0001         0.610       0.331     1.843104      1             Residential             NaN
+A-0724-0004-0000         1.485       0.974     1.524692      1             Residential 242 E CENTER ST
+A-0724-0004-0000         1.485       0.974     1.524692      1             Residential 242 E CENTER ST
+A-0724-0004-0000         1.485       0.974     1.524692      1             Residential 242 E CENTER ST
+A-0714-0001-0000        15.547      10.575     1.470133      1 Tax Exempt - Government             NaN
+A-0693-0005-0000         0.580       0.410     1.415759      1             Residential      70 N 200 E
+A-0693-0005-0000         0.580       0.410     1.415759      1             Residential      70 N 200 E
+A-0736-0003-0001         0.500       0.395     1.265576      1             Residential     300 E 200 N
+A-0729-0000-0000         0.388       0.308     1.260806      1               Greenbelt             NaN
+A-0693-0006-0000         0.630       0.799     0.788947      1             Residential             NaN
+A-0723-0001-0000         0.770       1.001     0.769399      1             Residential     200 N 100 W
+
+Top 15 understatements (stated acres << geometry):
+       PARCEL_ID  PARCEL_ACRES  geom_acres  stated/geom  parts              PROP_CLASS      PARCEL_ADD
+A-0735-0002-0000         0.080       0.155     0.516961      1               Greenbelt             NaN
+A-0724-0000-0000         0.666       1.126     0.591516      1            Agricultural             NaN
+A-0723-0001-0000         0.770       1.001     0.769399      1             Residential     200 N 100 W
+A-0723-0001-0000         0.770       1.001     0.769399      1             Residential     200 N 100 W
+A-0693-0006-0000         0.630       0.799     0.788947      1             Residential             NaN
+A-0729-0000-0000         0.388       0.308     1.260806      1               Greenbelt             NaN
+A-0736-0003-0001         0.500       0.395     1.265576      1             Residential     300 E 200 N
+A-0693-0005-0000         0.580       0.410     1.415759      1             Residential      70 N 200 E
+A-0693-0005-0000         0.580       0.410     1.415759      1             Residential      70 N 200 E
+A-0714-0001-0000        15.547      10.575     1.470133      1 Tax Exempt - Government             NaN
+A-0724-0004-0000         1.485       0.974     1.524692      1             Residential 242 E CENTER ST
+A-0724-0004-0000         1.485       0.974     1.524692      1             Residential 242 E CENTER ST
+A-0724-0004-0000         1.485       0.974     1.524692      1             Residential 242 E CENTER ST
+A-0739-0001-0001         0.610       0.331     1.843104      1             Residential             NaN
+A-0640-0002-0000         1.800       0.959     1.877602      1             Residential             NaN
+
+--- Cross-field checks ---
+PROP_CLASS x has building data:
+col_0                                              False  True 
+PROP_CLASS                                                     
+<null>                                                 8      0
+Agricultural                                           2      2
+Commercial                                             1      2
+Commercial - Apartment & Condo                         0      3
+Commercial - Office Space                              1      0
+Commercial - Retail                                    1      1
+Greenbelt                                              9      3
+Residential                                           36    393
+Tax Exempt - Charitable Organization or Religious      1      0
+Tax Exempt - Government                               12      0
+
+PRIMARY_RES x has building data:
+col_0        False  True 
+PRIMARY_RES              
+<null>           8      0
+N               62     32
+Y                1    372
+
+--- String variants (case/whitespace/punctuation) ---
+SUBDIV_NAME      raw distinct=26  normalized distinct=26  collapsed=0
+CONST_MATERIAL   raw distinct=19  normalized distinct=19  collapsed=0
+PARCEL_CITY      raw distinct=1  normalized distinct=1  collapsed=0
+
+--- PARCEL_ID format families ---
+PARCEL_ID
+A-9999-9999-9999    450
+A-9999-9999-999A      6
+                      5
+A-9999-999A-9999      4
+A-9999-99A9-9999      3
+9999999               3
+A-9999-99AA-9999      2
+A-9999-9999-99AA      2
+
+Short ID samples:
+['0492542', '0418126', '0016912']

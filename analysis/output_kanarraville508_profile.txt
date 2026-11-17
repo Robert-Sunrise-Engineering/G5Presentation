@@ -1,0 +1,222 @@
+Rows: 508   Fields: 28
+==========================================================================================
+
+--- Per-field completeness ---
+          field   n  nulls  null_%  blanks  blank_%   dtype/distinct
+    COUNTY_NAME 508      0     0.0       0      0.0   str distinct=1
+      COUNTY_ID 508      0     0.0       0      0.0   str distinct=1
+   ASSESSOR_SRC 508      0     0.0       0      0.0   str distinct=1
+   BOUNDARY_SRC 508      0     0.0       0      0.0   str distinct=1
+     DISCLAIMER 508      0     0.0       0      0.0   str distinct=1
+   CURRENT_ASOF 508      0     0.0       0      0.0   datetime64[us]
+      PARCEL_ID 508      0     0.0       9      1.8 str distinct=267
+     SERIAL_NUM 508     12     2.4       0      0.0 str distinct=263
+     PARCEL_ADD 508    105    20.7       0      0.0 str distinct=183
+    PARCEL_CITY 508      0     0.0       0      0.0   str distinct=1
+ TAXEXEMPT_TYPE 508     12     2.4       0      0.0   str distinct=1
+   TAX_DISTRICT 508     12     2.4       0      0.0   str distinct=2
+TOTAL_MKT_VALUE 508     34     6.7       0      0.0          float64
+ LAND_MKT_VALUE 508     34     6.7       0      0.0          float64
+   PARCEL_ACRES 508     12     2.4       0      0.0          float64
+     PROP_CLASS 508     12     2.4       0      0.0   str distinct=9
+    PRIMARY_RES 508     12     2.4       0      0.0   str distinct=2
+      HOUSE_CNT 508     83    16.3       0      0.0   str distinct=7
+    SUBDIV_NAME 508    180    35.4       0      0.0  str distinct=27
+      BLDG_SQFT 508     83    16.3       0      0.0          float64
+ BLDG_SQFT_INFO 508    508   100.0       0      0.0   str distinct=0
+     FLOORS_CNT 508     83    16.3       0      0.0          float64
+    FLOORS_INFO 508     12     2.4       0      0.0   str distinct=1
+       BUILT_YR 508     83    16.3       0      0.0          float64
+    EFFBUILT_YR 508     83    16.3       0      0.0          float64
+ CONST_MATERIAL 508     83    16.3       0      0.0  str distinct=19
+   Shape_Length 508      0     0.0       0      0.0          float64
+     Shape_Area 508      0     0.0       0      0.0          float64
+
+--- Numeric summaries ---
+                 count       mean        std      min       1%        50%          99%          max  zeros  negatives
+TOTAL_MKT_VALUE 474.00 347,824.46 221,669.49 2,205.00 8,311.38 321,554.00 1,050,635.00 1,270,932.00      0          0
+LAND_MKT_VALUE  474.00  66,024.15  20,674.92 2,205.00 7,176.96  60,461.00   129,248.00   236,748.00      0          0
+PARCEL_ACRES    496.00       0.99       1.94     0.07     0.19       0.46        11.79        15.63      0          0
+BLDG_SQFT       425.00   1,055.56     815.16    10.00    56.96     990.00     3,300.08     3,584.00      0          0
+FLOORS_CNT      425.00       1.00       0.07     1.00     1.00       1.00         1.00         2.00      0          0
+BUILT_YR        425.00   1,982.86      29.55 1,895.00 1,900.00   1,991.00     2,023.00     2,023.00      0          0
+EFFBUILT_YR     425.00      19.80      11.18     1.00     1.00      18.00        40.00        97.00      0          0
+Shape_Length    508.00     330.91     456.35    73.23   142.19     235.38     1,258.62     6,074.91      0          0
+Shape_Area      508.00   6,264.19  11,865.29   334.68 1,003.31   3,097.62    77,372.30   101,160.34      0          0
+
+--- Dates ---
+CURRENT_ASOF: min=2024-07-18 00:00:00 max=2024-07-18 00:00:00 nulls=0 distinct=1
+
+--- String values (low cardinality, <= 60) ---
+
+[COUNTY_NAME] distinct=1
+COUNTY_NAME
+Iron County    508
+
+[COUNTY_ID] distinct=1
+COUNTY_ID
+11    508
+
+[ASSESSOR_SRC] distinct=1
+ASSESSOR_SRC
+https://ironcounty.net/departments/assessor    508
+
+[BOUNDARY_SRC] distinct=1
+BOUNDARY_SRC
+https://ironcounty.net/departments/recorders    508
+
+[DISCLAIMER] distinct=1
+DISCLAIMER
+http://www.utah.gov/disclaimer.html    508
+
+[PARCEL_CITY] distinct=1
+PARCEL_CITY
+Kanarraville    508
+
+[TAXEXEMPT_TYPE] distinct=1
+TAXEXEMPT_TYPE
+Unknown    496
+
+[TAX_DISTRICT] distinct=2
+TAX_DISTRICT
+03    495
+10      1
+
+[PROP_CLASS] distinct=9
+PROP_CLASS
+Residential                                          453
+Tax Exempt - Government                               15
+Greenbelt                                             14
+Agricultural                                           4
+Commercial - Apartment & Condo                         3
+Commercial                                             3
+Commercial - Retail                                    2
+Tax Exempt - Charitable Organization or Religious      1
+Commercial - Office Space                              1
+
+[PRIMARY_RES] distinct=2
+PRIMARY_RES
+Y    390
+N    106
+
+[HOUSE_CNT] distinct=7
+HOUSE_CNT
+2    125
+3    123
+1     70
+4     68
+5     20
+6     12
+7      7
+
+[SUBDIV_NAME] distinct=27
+SUBDIV_NAME
+KANARRA TOWN SURVEY BLK 12    22
+KANARRA TOWN SURVEY BLK 05    20
+KANARRA TOWN SURVEY BLK 09    19
+KANARRA TOWN SURVEY BLK 15    19
+KANARRA TOWN SURVEY BLK 16    17
+KANARRA TOWN SURVEY BLK 06    16
+KANARRA TOWN SURVEY BLK 17    15
+KANARRA TOWN SURVEY BLK 14    15
+KANARRA TOWN SURVEY BLK 25    15
+KANARRA TOWN SURVEY BLK 21    14
+KANARRA FIELDS SUBDIVISION    14
+KANARRA TOWN SURVEY BLK 18    13
+KANARRA TOWN SURVEY BLK 19    13
+KANARRA TOWN SURVEY BLK 20    13
+KANARRA TOWN SURVEY BLK 24    12
+KANARRA TOWN SURVEY BLK 08    10
+KANARRA TOWN SURVEY BLK 13    10
+KANARRA TOWN SURVEY BLK 02    10
+KANARRA TOWN SURVEY BLK 04    10
+KANARRA TOWN SURVEY BLK 01    10
+KANARRA TOWN SURVEY BLK 10     9
+KANARRA TOWN SURVEY BLK 23     8
+KANARRA TOWN SURVEY BLK 07     8
+KANARRA TOWN SURVEY BLK 22     8
+KANARRA TOWN SURVEY BLK 26     4
+KANARRA TOWN SURVEY BLK 03     3
+KANARRA TOWN SURVEY BLK 11     1
+
+[FLOORS_INFO] distinct=1
+FLOORS_INFO
+Only above grade floors are counted    496
+
+[CONST_MATERIAL] distinct=19
+CONST_MATERIAL
+Wood Framed                              100
+Wood                                      92
+Frame:  Metal Vinyl Siding                72
+Frame:  Plywood Hardboard                 41
+Frame:  Stucco or Cement Fiber Siding     29
+Steel Framed                              22
+Masonry:  Common Brick                    13
+Aluminum                                  12
+Frame:  Synth Plaster (EIFS)               8
+Frame:  Rustic Log                         8
+Masonry                                    8
+2 X 4: Hardboard Sheet                     6
+Frame:  Masonry Veneer                     5
+Pole Framed                                3
+Frame:  Wood Siding                        2
+Frame:  Wood Shingles or Shake             1
+Masonry:  Concrete Block                   1
+2 X 4: Aluminum                            1
+Hoop                                       1
+
+--- High-cardinality string samples ---
+
+[PARCEL_ID] distinct=267  sample: ['A-0661-0000-0000', 'A-0661-0000-0000', 'A-0661-0000-0000', 'A-0661-0000-0000', 'A-0698-0001-0000']
+
+[SERIAL_NUM] distinct=263  sample: ['0016847', '0016847', '0016847', '0016847', '0388196']
+
+[PARCEL_ADD] distinct=183  sample: ['140 S 100 W', '140 S 100 W', '140 S 100 W', '140 S 100 W', '75 S 100 E']
+
+==========================================================================================
+TARGETED QC CHECKS
+==========================================================================================
+PARCEL_ID null                                                 0
+PARCEL_ID duplicate rows (beyond first)                        241
+PARCEL_ID distinct                                             267
+PARCEL_ID with leading/trailing whitespace                     0
+PARCEL_ID length distribution                                  {16: np.int64(496), 0: np.int64(9), 7: np.int64(3)}
+PARCEL_ID examples                                             ['A-0661-0000-0000', 'A-0661-0000-0000', 'A-0661-0000-0000', 'A-0661-0000-0000', 'A-0698-0001-0000', 'A-0665-0001-0001', 'A-0665-0001-0001', 'A-0665-0001-0001']
+PARCEL_ID values appearing >1 time                             130
+  example duplicate IDs                                        ['A-0661-0000-0000', 'A-0665-0001-0001', 'A-0725-0001-0000', 'A-0686-0000-0000', 'A-0714-0001-0000', 'A-0714-0000-0000', 'A-0736-0014-0000', 'A-0736-0012-0000', 'A-0736-0009-0000', 'A-0700-0000-0000']
+SERIAL_NUM distinct (non-null)                                 263
+SERIAL_NUM duplicate values                                    233
+SERIAL_NUM examples                                            ['0016847', '0016847', '0016847', '0016847', '0388196']
+COUNTY_NAME values                                             {'Iron County': np.int64(508)}
+COUNTY_ID values                                               {'11': np.int64(508)}
+Rows with ALL assessor fields null                             12
+Rows with SOME (not all) assessor fields null                  0
+Rows with ALL building fields null                             83
+Rows with ANY building field present                           425
+HOUSE_CNT non-null, non-numeric                                0
+HOUSE_CNT numeric values                                       {2.0: np.int64(125), 3.0: np.int64(123), nan: np.int64(83), 1.0: np.int64(70), 4.0: np.int64(68), 5.0: np.int64(20), 6.0: np.int64(12), 7.0: np.int64(7)}
+BLDG_SQFT > 0 but HOUSE_CNT null                               0
+HOUSE_CNT > 0 but BLDG_SQFT null/0                             0
+BUILT_YR < 1850 or > 2024                                      0
+EFFBUILT_YR value range                                        (1.0, 97.0)
+EFFBUILT_YR < 1000 count (looks like age, not year)            425
+LAND_MKT_VALUE > TOTAL_MKT_VALUE                               0
+LAND_MKT_VALUE == TOTAL_MKT_VALUE                              43
+TOTAL_MKT_VALUE null but LAND_MKT_VALUE present                0
+LAND_MKT_VALUE null but TOTAL_MKT_VALUE present                0
+PARCEL_ACRES == 0 exactly                                      0
+PARCEL_ACRES < 0.001                                           0
+PARCEL_ACRES percentiles                                       {0.01: 0.1889, 0.1: 0.45, 0.5: 0.46, 0.9: 1.29, 0.99: 11.79}
+PARCEL_ADD non-null                                            403
+PARCEL_ADD duplicate normalized values (beyond first)          220
+Most repeated addresses                                        {'280 S MAIN ST': 7, '125 N 200 W': 6, '345 S MAIN ST': 6, '110 S 100 W': 5, '319 E 100 S': 5}
+PARCEL_CITY values                                             {'Kanarraville': np.int64(508)}
+PARCEL_ADD present but PARCEL_CITY null/blank                  0
+Addresses with no digits                                       0
+Addresses ending in unusual punctuation                        0
+TAX_DISTRICT distinct                                          2
+TAX_DISTRICT length distribution                               {2: np.int64(496)}
+TAX_DISTRICT examples                                          ['03', '03', '03', '03', '03', '03', '03', '03', '03', '03']
+CURRENT_ASOF distinct values                                   ['2024-07-18 00:00:00']
+ASSESSOR_SRC unique                                            1
+ASSESSOR_SRC sample                                            ['https://ironcounty.net/departments/assessor']
