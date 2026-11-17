@@ -1,0 +1,74 @@
+{
+  "created": "2026-11-17T14:30:20",
+  "model": "gemma4:12b",
+  "parcels_fc": "C:\\Users\\user\\projects\\G5Presentation\\demo\\GDBs\\demo.gdb\\Kanarraville_Parcels",
+  "edits": [
+    {
+      "parcel_id": "A-0729-0002-0002",
+      "oid": [
+        196
+      ],
+      "field": "PARCEL_ACRES",
+      "new_value": "0.4912",
+      "original_value": 0.988,
+      "status": "pending_human_approval"
+    }
+  ],
+  "flags": [
+    {
+      "parcel_id": "A-0714-0000-0000",
+      "oids": [
+        23,
+        24,
+        465
+      ],
+      "verdict": "ACCEPT",
+      "rule": "G7",
+      "reason": "non-destructive review action"
+    },
+    {
+      "parcel_id": "A-0714-0001-0000",
+      "oids": [
+        21,
+        22,
+        466
+      ],
+      "verdict": "ACCEPT",
+      "rule": "G7",
+      "reason": "non-destructive review action"
+    },
+    {
+      "parcel_id": "A-0640-0002-0000",
+      "oids": [
+        334,
+        477
+      ],
+      "verdict": "ACCEPT",
+      "rule": "G7",
+      "reason": "non-destructive review action"
+    },
+    {
+      "parcel_id": "A-0647-0647-000N",
+      "oids": [
+        377,
+        378,
+        379,
+        481,
+        482,
+        483
+      ],
+      "verdict": "ACCEPT",
+      "rule": "G7",
+      "reason": "non-destructive review action"
+    },
+    {
+      "parcel_id": "E-0337-0002-00R1",
+      "oids": [
+        429
+      ],
+      "verdict": "DOWNGRADE",
+      "rule": "G5",
+      "reason": "parcel straddles the boundary; mapped footprint is clipped, so a replacement acreage cannot be derived"
+    }
+  ]
+}

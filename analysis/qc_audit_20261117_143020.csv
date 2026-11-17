@@ -1,0 +1,8 @@
+#,parcel_id,action,oids,field,new value,model rationale,verdict,rule,gate reason
+1,A-0646-0001-0000,merge_rows,"398,399,400,401,402,403,404",,,Multiple rows with a single geometry and varying building attributes suggest duplicate records for a sing,REJECT,G1,"HOUSE_CNT=7 and per-building fields vary -> rows are real units, not duplicates"
+2,A-0714-0000-0000,flag_review,"23,24,465",,,Multiple geometries and partial boundary status suggest distinct units or complex land division; requires,ACCEPT,G7,non-destructive review action
+3,A-0714-0001-0000,flag_review,"21,22,466",,,Multiple geometries and significant acreage discrepancy suggest distinct records or complex land division,ACCEPT,G7,non-destructive review action
+4,A-0640-0002-0000,flag_review,"334,477",,,Multiple geometries and partial boundary status suggest distinct records.,ACCEPT,G7,non-destructive review action
+5,A-0647-0647-000N,flag_review,"377,378,379,481,482,483",,,Multiple rows and multiple geometries with varying building attributes suggest distinct units or complex ,ACCEPT,G7,non-destructive review action
+6,E-0337-0002-00R1,update_field,429,PARCEL_ACRES,0.8852,Significant discrepancy between stated and dissolved acreage for a single geometry.,DOWNGRADE,G5,"parcel straddles the boundary; mapped footprint is clipped, so a replacement acreage cannot be derived"
+7,A-0729-0002-0002,update_field,196,PARCEL_ACRES,0.4912,Significant discrepancy between stated and dissolved acreage for a single geometry.,ACCEPT,G7,measured 0.4912 is 50% from assessed; within boundary; single geometry
