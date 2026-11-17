@@ -1,0 +1,71 @@
+Blank-ID rows                        : 1,517
+  ...geometry also used by an attributed row: 40 (2.6%)
+  ...geometry unique to blank rows           : 1,477
+
+Rows with ID but all assessor fields null: 1,742
+PARCEL_ID SERIAL_NUM PARCEL_ADD  PARCEL_ACRES
+  9999999        NaN        NaN           NaN
+  9999999        NaN        NaN           NaN
+  9999999        NaN        NaN           NaN
+  0111838        NaN        NaN           NaN
+  9999999        NaN        NaN           NaN
+
+Rows with PARCEL_ID '9999999'          : 532
+PARCEL_ID PROP_CLASS  PARCEL_ACRES SUBDIV_NAME
+  9999999        NaN           NaN         NaN
+  9999999        NaN           NaN         NaN
+  9999999        NaN           NaN         NaN
+  9999999        NaN           NaN         NaN
+  9999999        NaN           NaN         NaN
+
+Acreage mismatch rate by geometry-copy count:
+  unique geometry            n=43,466  severe mismatch= 21.5%
+  geometry shared by 2       n=10,477  severe mismatch=  3.8%
+  geometry shared by 3-9     n= 7,286  severe mismatch=  5.3%
+  geometry shared by 10+     n=   168  severe mismatch= 61.3%
+
+Total area overcount from repeated geometry:
+  sum of all polygon areas : 8,911.2 km2
+  sum over unique geometries: 8,534.7 km2
+  overcount                 : 376.5 km2 (4.4%)
+
+Example groups with repeated geometry but differing rows (7,503 candidate groups):
+
+  PARCEL_ID=E-1229-0000-0000  rows=523  distinct geometry=522
+       PARCEL_ID SERIAL_NUM  PROP_CLASS  PARCEL_ACRES PARCEL_ADD        SUBDIV_NAME  geom_copies
+E-1229-0000-0000    0171600 Residential        74.863        NaN BERYL TOWN BLK 003            1
+E-1229-0000-0000    0171600 Residential        74.863        NaN BERYL TOWN BLK 003            1
+E-1229-0000-0000    0171600 Residential        74.863        NaN BERYL TOWN BLK 003            1
+E-1229-0000-0000    0171600 Residential        74.863        NaN BERYL TOWN BLK 003            1
+E-1229-0000-0000    0171600 Residential        74.863        NaN BERYL TOWN BLK 003            1
+E-1229-0000-0000    0171600 Residential        74.863        NaN BERYL TOWN BLK 003            1
+E-1229-0000-0000    0171600 Residential        74.863        NaN BERYL TOWN BLK 003            1
+E-1229-0000-0000    0171600 Residential        74.863        NaN BERYL TOWN BLK 003            1
+
+  PARCEL_ID=E-0683-0000-0000  rows=21  distinct geometry=3
+       PARCEL_ID SERIAL_NUM PROP_CLASS  PARCEL_ACRES     PARCEL_ADD SUBDIV_NAME  geom_copies
+E-0683-0000-0000    0161148  Greenbelt         160.0 11661 W HWY 56         NaN            7
+E-0683-0000-0000    0161148  Greenbelt         160.0 11661 W HWY 56         NaN            7
+E-0683-0000-0000    0161148  Greenbelt         160.0 11661 W HWY 56         NaN            7
+E-0683-0000-0000    0161148  Greenbelt         160.0 11661 W HWY 56         NaN            7
+E-0683-0000-0000    0161148  Greenbelt         160.0 11661 W HWY 56         NaN            7
+E-0683-0000-0000    0161148  Greenbelt         160.0 11661 W HWY 56         NaN            7
+E-0683-0000-0000    0161148  Greenbelt         160.0 11661 W HWY 56         NaN            7
+E-0683-0000-0000    0161148  Greenbelt         160.0 11661 W HWY 56         NaN            7
+
+--- Building-value outliers ---
+BLDG_SQFT <= 10 sqft      : 93
+BLDG_SQFT > 100,000 sqft  : 10
+BLDG_SQFT 1 sqft          : 63
+          PARCEL_ID              PROP_CLASS  BLDG_SQFT HOUSE_CNT  BUILT_YR
+   B-1236-0000-0000              Commercial   124738.0         1    2022.0
+   B-0010-0014-0000              Commercial   165372.0         2    1990.0
+   B-1412-0000-0000              Commercial   311300.0         1    1996.0
+B-0003-0006-0001-02 Commercial - Industrial   215984.0         1    1973.0
+   B-1703-0000-0000 Commercial - Industrial   264000.0         1    2001.0
+
+--- EFFBUILT_YR vs BUILT_YR ---
+rows with both: 32,859
+EFFBUILT_YR percentiles: {0.01: 1.0, 0.5: 15.0, 0.99: 40.0}
+BUILT_YR percentiles   : {0.01: 1910.0, 0.5: 1999.0, 0.99: 2023.0}
+EFFBUILT_YR would be a year <1980: 32,859 (100.0% of non-null)

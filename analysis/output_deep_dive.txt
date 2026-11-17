@@ -1,0 +1,262 @@
+
+Exact duplicate records (all attributes + geometry): 832
+  ...rows involved in exact-duplicate sets         : 1,493
+
+--- Duplicate PARCEL_ID group semantics ---
+duplicate-ID groups: 10,186
+  exact duplicates (same geom, same attrs) : 52 groups, 117 rows
+  same attrs, different geometry (multipart): 2,673 groups, 9,220 rows
+  different attributes                      : 7,461 groups, 18,701 rows
+
+Top 10 largest PARCEL_ID groups:
+
+  ID='9999999'  rows=532  distinct_geom=532  distinct_attrs=5
+    PROP_CLASS    : []
+    TAX_DISTRICT  : []
+    PARCEL_ADD    : []
+    SUBDIV_NAME   : []
+    PARCEL_ACRES  : []
+
+  ID='E-1229-0000-0000'  rows=523  distinct_geom=522  distinct_attrs=1
+    PROP_CLASS    : ['Residential']
+    TAX_DISTRICT  : ['07']
+    PARCEL_ADD    : []
+    SUBDIV_NAME   : ['BERYL TOWN BLK 003']
+    PARCEL_ACRES  : ['74.863']
+
+  ID='C-0060-0001-0000'  rows=137  distinct_geom=137  distinct_attrs=1
+    PROP_CLASS    : ['Greenbelt']
+    TAX_DISTRICT  : ['07']
+    PARCEL_ADD    : []
+    SUBDIV_NAME   : ['GOLDEN SUNSET RANCHOS UNIT 1 BLK A']
+    PARCEL_ACRES  : ['95.0']
+
+  ID='E-0171-0002-0046'  rows=133  distinct_geom=133  distinct_attrs=1
+    PROP_CLASS    : ['Residential']
+    TAX_DISTRICT  : ['10']
+    PARCEL_ADD    : []
+    SUBDIV_NAME   : ['MONTE VISTA ACRES 5 BLK A']
+    PARCEL_ACRES  : ['142.47']
+
+  ID='E-1078-0002-1078-04'  rows=126  distinct_geom=126  distinct_attrs=1
+    PROP_CLASS    : ['Residential']
+    TAX_DISTRICT  : ['07']
+    PARCEL_ADD    : []
+    SUBDIV_NAME   : ['PARADISE HILLS ESTATES BLK A']
+    PARCEL_ACRES  : ['320.21']
+
+  ID='E-1687-0002-0001-343'  rows=96  distinct_geom=96  distinct_attrs=1
+    PROP_CLASS    : ['Residential']
+    TAX_DISTRICT  : ['07']
+    PARCEL_ADD    : []
+    SUBDIV_NAME   : ['GARDEN VALLEY RANCHOS 7']
+    PARCEL_ACRES  : ['112.0']
+
+  ID='E-1700-0000-0000'  rows=93  distinct_geom=93  distinct_attrs=1
+    PROP_CLASS    : ['Greenbelt']
+    TAX_DISTRICT  : ['07']
+    PARCEL_ADD    : []
+    SUBDIV_NAME   : ['GARDEN VALLEY RANCHOS 5']
+    PARCEL_ACRES  : ['103.37']
+
+  ID='D-0492-0000-0000'  rows=77  distinct_geom=77  distinct_attrs=1
+    PROP_CLASS    : ['Greenbelt']
+    TAX_DISTRICT  : ['10']
+    PARCEL_ADD    : []
+    SUBDIV_NAME   : ['ENOCH VALLEY ACRES BLK 01']
+    PARCEL_ACRES  : ['98.73']
+
+  ID='E-1687-0002-0001-342'  rows=76  distinct_geom=76  distinct_attrs=1
+    PROP_CLASS    : ['Residential']
+    TAX_DISTRICT  : ['07']
+    PARCEL_ADD    : []
+    SUBDIV_NAME   : ['GARDEN VALLEY RANCHOS 7']
+    PARCEL_ACRES  : ['79.79']
+
+  ID='E-1687-0006-0009-01'  rows=57  distinct_geom=57  distinct_attrs=1
+    PROP_CLASS    : ['Greenbelt']
+    TAX_DISTRICT  : ['07']
+    PARCEL_ADD    : []
+    SUBDIV_NAME   : ['GARDEN VALLEY RANCHOS 5']
+    PARCEL_ACRES  : ['67.69']
+
+--- Rows sharing identical geometry, by property class ---
+PROP_CLASS
+Residential                                          15545
+Commercial - Apartment & Condo                        1969
+Agricultural                                           887
+Greenbelt                                              741
+Commercial                                             254
+<null>                                                 211
+Commercial - Office Space                              159
+Tax Exempt - Government                                 96
+Commercial - Retail                                     41
+Tax Exempt - Charitable Organization or Religious       23
+Personal Property                                       14
+Commercial - Industrial                                 12
+
+--- Duplicate-geometry group semantics ---
+duplicate-geometry groups          : 7,871  rows=19,968
+  ...single PARCEL_ID in group     : 7,590  rows=18,172
+  ...multiple PARCEL_IDs in group  : 281  rows=1,796
+  ...non-geometry attrs identical  : 49  rows=119
+  ...stated acres differ           : 56
+
+Rows in multi-PID duplicate-geometry groups, by class:
+PROP_CLASS
+Commercial - Apartment & Condo    1144
+<null>                             181
+Agricultural                       147
+Commercial - Office Space          126
+Commercial                         107
+Residential                         47
+Tax Exempt - Government             21
+Greenbelt                            9
+Commercial - Retail                  9
+Unknown                              5
+
+Examples of multi-PID shared geometry:
+
+  geometry a6129466f2  rows=69  PIDs=68
+       PARCEL_ID                     PROP_CLASS PARCEL_ADD  PARCEL_ACRES
+A-1197-000E-0101 Commercial - Apartment & Condo        NaN           NaN
+A-1197-000E-0102 Commercial - Apartment & Condo        NaN           NaN
+A-1197-000E-0104 Commercial - Apartment & Condo        NaN           NaN
+A-1197-000E-0105 Commercial - Apartment & Condo        NaN           NaN
+A-1197-000E-0106 Commercial - Apartment & Condo        NaN           NaN
+A-1197-000E-0107 Commercial - Apartment & Condo        NaN           NaN
+
+  geometry ffe1030ba1  rows=56  PIDs=56
+       PARCEL_ID                     PROP_CLASS PARCEL_ADD  PARCEL_ACRES
+A-1197-000B-0101 Commercial - Apartment & Condo        NaN           NaN
+A-1197-000B-0102 Commercial - Apartment & Condo        NaN           NaN
+A-1197-000B-0105 Commercial - Apartment & Condo        NaN           NaN
+A-1197-000B-0106 Commercial - Apartment & Condo        NaN           NaN
+A-1197-000B-0107 Commercial - Apartment & Condo        NaN           NaN
+A-1197-000B-0109 Commercial - Apartment & Condo        NaN           NaN
+
+--- Placeholder / suspicious IDs ---
+blank                       : 1,517
+all 9s                      : 533
+all 0s                      : 16
+7-digit numeric (any)       : 1,665
+7-digit, not all 0/9        : 1,133
+
+--- Rows with blank PARCEL_ID ---
+count=1,517
+PROP_CLASS
+<null>    1517
+distinct geometry=1,498  exact-dup rows=19
+sample:
+PARCEL_ID SERIAL_NUM PROP_CLASS PARCEL_ADD  PARCEL_ACRES
+                 NaN        NaN        NaN           NaN
+                 NaN        NaN        NaN           NaN
+                 NaN        NaN        NaN           NaN
+                 NaN        NaN        NaN           NaN
+                 NaN        NaN        NaN           NaN
+
+--- Acreage consistency (equal-area geometry) ---
+n=64,095
+ratio percentiles: {0.01: 0.683, 0.05: 0.911, 0.25: 0.985, 0.5: 1.0, 0.75: 1.026, 0.95: 7.94, 0.99: 250.784}
+
+acres >= 0.05 (n=61,397): within 10% of geometry = 79.5%, within 25% = 83.6%
+severe mismatch (>25% off, n=10,243) by class:
+PROP_CLASS
+Residential                                          7158
+Greenbelt                                            1680
+Agricultural                                          523
+Tax Exempt - Government                               390
+Commercial - Office Space                             207
+Commercial                                            181
+Commercial - Apartment & Condo                         55
+Tax Exempt - Charitable Organization or Religious      19
+Commercial - Retail                                    12
+Unknown                                                11
+mismatch buckets: {'stated >100x geometry': 1082, 'stated 10-100x geometry': 1707, 'stated 2-10x geometry': 4252, 'stated 1.25-2x geometry': 2406, 'stated 0.5-0.8x geometry': 477, 'stated <0.5x geometry': 319}
+stated >=0.05 ac but geometry <0.01 ac : 18
+
+Top 15 overstatements (stated acres >> geometry):
+       PARCEL_ID  PARCEL_ACRES  geom_acres  stated/geom  parts                PROP_CLASS PARCEL_ADD
+D-0261-0010-0000       1301.64       0.000 1.372938e+08      1                 Greenbelt        NaN
+B-1311-0000-0000          2.32       0.000 3.209458e+06      1                Commercial        NaN
+C-0076-0004-0000         18.36       0.000 2.341867e+06      1              Agricultural        NaN
+B-1879-0008-0000         56.41       0.000 2.075258e+06      1               Residential        NaN
+E-0200-0000-0000         20.00       0.000 1.189557e+06      1                 Greenbelt        NaN
+C-0140-0000-0000        478.75       0.001 6.198278e+05      1                 Greenbelt        NaN
+B-1459-0002-0000         36.96       0.000 2.293797e+05      1   Tax Exempt - Government        NaN
+C-1120-0000-0000        959.02       0.019 4.941454e+04      1              Agricultural        NaN
+E-1759-0000-0000        441.16       0.048 9.194833e+03      1                 Greenbelt        NaN
+E-1563-0000-0000         85.59       0.009 9.019261e+03      1              Agricultural        NaN
+C-0076-0004-0006          0.09       0.000 8.584843e+03      1   Tax Exempt - Government        NaN
+E-1885-0000-0000         18.79       0.003 6.749095e+03      1 Commercial - Office Space        NaN
+E-0744-0000-0000         16.72       0.003 5.549293e+03      1                 Greenbelt        NaN
+E-0324-0000-0000        215.54       0.061 3.555441e+03      1                 Greenbelt        NaN
+C-1170-0000-0000        439.60       0.124 3.535104e+03      1   Tax Exempt - Government        NaN
+
+Top 15 understatements (stated acres << geometry):
+       PARCEL_ID  PARCEL_ACRES  geom_acres  stated/geom  parts                PROP_CLASS PARCEL_ADD
+E-0684-0016-0013          0.29     602.696     0.000481      1              Agricultural        NaN
+E-0684-0016-0015          0.29     602.696     0.000481      1              Agricultural        NaN
+E-0635-0016-0014          0.19     330.662     0.000575      1   Tax Exempt - Government        NaN
+E-0635-0016-0015          0.19     330.662     0.000575      1 Commercial - Office Space        NaN
+E-0635-0016-0013          0.19     330.662     0.000575      1 Commercial - Office Space        NaN
+E-0684-0016-0012          0.86     602.696     0.001427      1              Agricultural        NaN
+E-0684-0016-0011          0.86     602.696     0.001427      1              Agricultural        NaN
+E-0684-0016-0010          0.86     602.696     0.001427      1              Agricultural        NaN
+E-0635-0016-0009          0.57     330.662     0.001724      1 Commercial - Office Space        NaN
+E-0635-0016-0008          0.57     330.662     0.001724      1   Tax Exempt - Government        NaN
+E-0635-0016-0007          0.57     330.662     0.001724      1   Tax Exempt - Government        NaN
+E-0635-0016-0011          0.57     330.662     0.001724      1   Tax Exempt - Government        NaN
+E-0635-0016-0010          0.57     330.662     0.001724      1 Commercial - Office Space        NaN
+E-0684-0016-0002          1.20     602.696     0.001991      1              Agricultural        NaN
+E-0684-0016-0005          1.20     602.696     0.001991      1              Agricultural        NaN
+
+--- Cross-field checks ---
+PROP_CLASS x has building data:
+col_0                                              False  True 
+PROP_CLASS                                                     
+<null>                                              3259      0
+Agricultural                                        3800   1415
+Commercial                                           863    572
+Commercial - Apartment & Condo                       171   4272
+Commercial - Industrial                               56     58
+Commercial - Office Space                            875     82
+Commercial - Retail                                   96     71
+Greenbelt                                           4622   1100
+Mixed Use                                             38      8
+Personal Property                                      1     19
+Residential                                        20291  25317
+Tax Exempt - Charitable Organization or Religious    159     45
+Tax Exempt - Government                             1587    139
+Undeveloped                                            5      2
+Unknown                                               25     17
+
+PRIMARY_RES x has building data:
+col_0        False  True 
+PRIMARY_RES              
+<null>        3259      0
+N            32401   6401
+Y              188  26716
+
+--- String variants (case/whitespace/punctuation) ---
+SUBDIV_NAME      raw distinct=2,327  normalized distinct=2,327  collapsed=0
+CONST_MATERIAL   raw distinct=39  normalized distinct=39  collapsed=0
+PARCEL_CITY      raw distinct=7  normalized distinct=7  collapsed=0
+
+--- PARCEL_ID format families ---
+PARCEL_ID
+A-9999-9999-9999        53222
+A-9999-9999-9999-99      4828
+A-9999-999A-9999         2245
+9999999                  1665
+A-9999-9999-9999-999     1577
+                         1517
+A-9999-9999-999A         1467
+A-9999-9999-999A-99       978
+A-9999-9999-99AA          414
+AA-A-9999-9999-9999       266
+A-9999-99AA-9999          129
+A-9999-99A9-9999          109
+
+Short ID samples:
+['9999999', '9999999', '9999999', '0111838', '9999999', '0128436', '0004890', '0004890', '0006777', '0006777']

@@ -1,0 +1,255 @@
+Rows: 68,965   Fields: 26
+==========================================================================================
+
+--- Per-field completeness ---
+          field     n  nulls  null_%  blanks  blank_%      dtype/distinct
+    COUNTY_NAME 68965      0     0.0       0      0.0      str distinct=1
+      COUNTY_ID 68965      0     0.0       0      0.0      str distinct=1
+   ASSESSOR_SRC 68965      0     0.0       0      0.0      str distinct=1
+   BOUNDARY_SRC 68965      0     0.0       0      0.0      str distinct=1
+     DISCLAIMER 68965      0     0.0       0      0.0      str distinct=1
+   CURRENT_ASOF 68965      0     0.0       0      0.0      datetime64[us]
+      PARCEL_ID 68965      0     0.0    1517      2.2 str distinct=49,597
+     SERIAL_NUM 68965   3259     4.7       0      0.0 str distinct=48,583
+     PARCEL_ADD 68965  34649    50.2       0      0.0 str distinct=23,928
+    PARCEL_CITY 68965      0     0.0   35863     52.0      str distinct=7
+ TAXEXEMPT_TYPE 68965   3259     4.7       0      0.0      str distinct=1
+   TAX_DISTRICT 68965   3259     4.7       0      0.0     str distinct=30
+TOTAL_MKT_VALUE 68965   8120    11.8       0      0.0             float64
+ LAND_MKT_VALUE 68965   8148    11.8       0      0.0             float64
+   PARCEL_ACRES 68965   4870     7.1       0      0.0             float64
+     PROP_CLASS 68965   3259     4.7       0      0.0     str distinct=14
+    PRIMARY_RES 68965   3259     4.7       0      0.0      str distinct=2
+      HOUSE_CNT 68965  35848    52.0       0      0.0     str distinct=13
+    SUBDIV_NAME 68965  19579    28.4       0      0.0  str distinct=2,327
+      BLDG_SQFT 68965  35848    52.0       0      0.0             float64
+ BLDG_SQFT_INFO 68965  68965   100.0       0      0.0      str distinct=0
+     FLOORS_CNT 68965  35848    52.0       0      0.0             float64
+    FLOORS_INFO 68965   3259     4.7       0      0.0      str distinct=1
+       BUILT_YR 68965  35848    52.0       0      0.0             float64
+    EFFBUILT_YR 68965  36106    52.4       0      0.0             float64
+ CONST_MATERIAL 68965  35848    52.0       0      0.0     str distinct=39
+
+--- Numeric summaries ---
+                    count       mean        std      min       1%        50%          99%           max  zeros  negatives
+TOTAL_MKT_VALUE 60,845.00 279,305.46 500,584.27   329.00 1,314.00 200,000.00 1,595,915.64 32,936,900.00      0          0
+LAND_MKT_VALUE  60,817.00  94,084.80 274,441.72   329.00 1,100.00  60,151.00   784,500.00 25,733,427.00      0          0
+PARCEL_ACRES    64,095.00      19.92      86.64     0.00     0.02       0.78       395.38      3,392.18      0          0
+BLDG_SQFT       33,117.00   1,750.36   5,330.66     1.00    50.00   1,352.00     9,699.52    546,344.00      0          0
+FLOORS_CNT      33,117.00       1.06       0.25     1.00     1.00       1.00         2.00          4.00      0          0
+BUILT_YR        33,117.00   1,993.22      25.19 1,860.00 1,910.00   1,999.00     2,023.00      2,024.00      0          0
+EFFBUILT_YR     32,859.00      16.64       9.98     1.00     1.00      15.00        40.00        124.00      0          0
+
+--- Dates ---
+CURRENT_ASOF: min=2024-07-18 00:00:00 max=2024-07-18 00:00:00 nulls=0 distinct=1
+
+--- String values (low cardinality, <= 60) ---
+
+[COUNTY_NAME] distinct=1
+COUNTY_NAME
+Iron County    68965
+
+[COUNTY_ID] distinct=1
+COUNTY_ID
+11    68965
+
+[ASSESSOR_SRC] distinct=1
+ASSESSOR_SRC
+https://ironcounty.net/departments/assessor    68965
+
+[BOUNDARY_SRC] distinct=1
+BOUNDARY_SRC
+https://ironcounty.net/departments/recorders    68965
+
+[DISCLAIMER] distinct=1
+DISCLAIMER
+http://www.utah.gov/disclaimer.html    68965
+
+[PARCEL_CITY] distinct=7
+PARCEL_CITY
+                35863
+Cedar City      21275
+Enoch            4065
+Parowan          3434
+Brian Head       3213
+Paragonah         607
+Kanarraville      508
+
+[TAXEXEMPT_TYPE] distinct=1
+TAXEXEMPT_TYPE
+Unknown    65706
+
+[TAX_DISTRICT] distinct=30
+TAX_DISTRICT
+07      20353
+06      20037
+10      13878
+04       3899
+01       3370
+11       1370
+12        957
+05        648
+02        590
+03        496
+13         33
+07-2       12
+34          9
+15          7
+07-1        6
+33          6
+20          6
+10-3        4
+10-2        4
+21          4
+14          3
+25          3
+32          2
+18          2
+06-2        2
+29          1
+19          1
+30          1
+17          1
+16          1
+
+[PROP_CLASS] distinct=14
+PROP_CLASS
+Residential                                          45608
+Greenbelt                                             5722
+Agricultural                                          5215
+Commercial - Apartment & Condo                        4443
+Tax Exempt - Government                               1726
+Commercial                                            1435
+Commercial - Office Space                              957
+Tax Exempt - Charitable Organization or Religious      204
+Commercial - Retail                                    167
+Commercial - Industrial                                114
+Mixed Use                                               46
+Unknown                                                 42
+Personal Property                                       20
+Undeveloped                                              7
+
+[PRIMARY_RES] distinct=2
+PRIMARY_RES
+N    38802
+Y    26904
+
+[HOUSE_CNT] distinct=13
+HOUSE_CNT
+1     14963
+2     10888
+3      4729
+4      1637
+5       450
+6       167
+7       101
+8        72
+9        45
+10       20
+18       18
+17       16
+11       11
+
+[FLOORS_INFO] distinct=1
+FLOORS_INFO
+Only above grade floors are counted    65706
+
+[CONST_MATERIAL] distinct=39
+CONST_MATERIAL
+Frame:  Metal Vinyl Siding               7042
+Wood Framed                              6329
+Frame:  Stucco or Cement Fiber Siding    6252
+Wood                                     2736
+Frame:  Synth Plaster (EIFS)             2623
+Frame:  Plywood Hardboard                2273
+Steel Framed                              883
+Masonry:  Common Brick                    847
+Masonry                                   716
+Frame:  Masonry Veneer                    651
+Frame:  Rustic Log                        612
+2 X 4: Cement Lap                         453
+Aluminum                                  426
+Frame:  Wood Siding                       371
+2 X 4: Aluminum                           183
+2 X 4: Hardboard Sheet                    177
+Steel                                     141
+Masonry:  Concrete Block                  116
+Pole Framed                               110
+Frame:  Wood Shingles or Shake             40
+Wood Framed, Veneer                        39
+Frame:  Brick Veneer                       15
+2 X 4: Lap Siding                          15
+Masonry:  Stucco on Block                  13
+Hoop                                       12
+Masonry:  Face Brick or Stone              10
+Frame: Pine - Unfinished Interior           9
+2 X 6: Hardboard Sheet                      7
+Frame: Pine                                 3
+Frame: Cedar - Finished Interior            2
+Wood Slant Wall                             2
+Frame:  Stone Veneer                        2
+Masonry:  8"" Concrete                      1
+Masonry:  Stone on Block                    1
+Masonry:  Poured Concrete                   1
+Frame: Pine - Finished Interior             1
+2 X 6: Aluminum                             1
+Frame: Unfinished Interior                  1
+Concrete Column-Beam                        1
+
+--- High-cardinality string samples ---
+
+[PARCEL_ID] distinct=49,597  sample: ['SA-E-4134-0000-0000', 'D-0456-0911-0000', 'D-0456-0395-0000', 'D-0065-0000-0000', 'D-0456-0118-0000']
+
+[SERIAL_NUM] distinct=48,583  sample: ['0326709', '0128758', '0123346', '0111572', '0120607']
+
+[PARCEL_ADD] distinct=23,928  sample: ['7101 N 3525 W', '406 S WINTERWOOD DR', '701 S 800 W', '4407 S 2375 E', '701 S 800 W']
+
+[SUBDIV_NAME] distinct=2,327  sample: ['CEDAR VALLEY ACRES BLK 0E', 'CEDAR VALLEY ACRES BLK 0W', 'CEDAR VALLEY ACRES BLK 0W', 'CEDAR VALLEY ACRES BLK 0P', 'CEDAR VALLEY ACRES BLK 0P']
+
+==========================================================================================
+TARGETED QC CHECKS
+==========================================================================================
+PARCEL_ID null                                                 0
+PARCEL_ID duplicate rows (beyond first)                        19368
+PARCEL_ID distinct                                             49597
+PARCEL_ID with leading/trailing whitespace                     0
+PARCEL_ID length distribution                                  {16: np.int64(57775), 19: np.int64(6116), 20: np.int64(1694), 7: np.int64(1665), 0: np.int64(1517), 18: np.int64(104), 6: np.int64(44), 8: np.int64(16)}
+PARCEL_ID examples                                             ['SA-E-4134-0000-0000', 'D-0456-0911-0000', 'D-0456-0395-0000', 'D-0065-0000-0000', 'D-0456-0118-0000', 'D-0456-0538-0000', 'D-0456-0490-0000', 'D-0456-1082-0000']
+PARCEL_ID values appearing >1 time                             10187
+  example duplicate IDs                                        ['D-0456-0395-0000', 'D-0456-0118-0000', 'D-0456-0538-0000', 'D-0456-0490-0000', 'D-0456-1082-0000', 'D-0062-0002-0004', 'D-0068-0005-0004', '', 'D-0033-0002-0000', 'D-0030-0000-0000']
+SERIAL_NUM distinct (non-null)                                 48583
+SERIAL_NUM duplicate values                                    17123
+SERIAL_NUM examples                                            ['0326709', '0128758', '0123346', '0111572', '0120607']
+COUNTY_NAME values                                             {'Iron County': np.int64(68965)}
+COUNTY_ID values                                               {'11': np.int64(68965)}
+Rows with ALL assessor fields null                             3259
+Rows with SOME (not all) assessor fields null                  0
+Rows with ALL building fields null                             35848
+Rows with ANY building field present                           33117
+HOUSE_CNT non-null, non-numeric                                0
+HOUSE_CNT numeric values                                       {nan: np.int64(35848), 1.0: np.int64(14963), 2.0: np.int64(10888), 3.0: np.int64(4729), 4.0: np.int64(1637), 5.0: np.int64(450), 6.0: np.int64(167), 7.0: np.int64(101), 8.0: np.int64(72), 9.0: np.int64(45)}
+BLDG_SQFT > 0 but HOUSE_CNT null                               0
+HOUSE_CNT > 0 but BLDG_SQFT null/0                             0
+BUILT_YR < 1850 or > 2024                                      0
+EFFBUILT_YR value range                                        (1.0, 124.0)
+EFFBUILT_YR < 1000 count (looks like age, not year)            32859
+LAND_MKT_VALUE > TOTAL_MKT_VALUE                               0
+LAND_MKT_VALUE == TOTAL_MKT_VALUE                              28231
+TOTAL_MKT_VALUE null but LAND_MKT_VALUE present                0
+LAND_MKT_VALUE null but TOTAL_MKT_VALUE present                28
+PARCEL_ACRES == 0 exactly                                      0
+PARCEL_ACRES < 0.001                                           0
+PARCEL_ACRES percentiles                                       {0.01: 0.02, 0.1: 0.16, 0.5: 0.78, 0.9: 32.374, 0.99: 395.3818}
+PARCEL_ADD non-null                                            34316
+PARCEL_ADD duplicate normalized values (beyond first)          10388
+Most repeated addresses                                        {'11661 W HWY 56': 21, '877 N 200 W': 21, '7105 W 200 N TRAILER #': 16, '48 N COLLEGE WAY': 16, '5308 N 4200 W': 15}
+PARCEL_CITY values                                             {'': np.int64(35863), 'Cedar City': np.int64(21275), 'Enoch': np.int64(4065), 'Parowan': np.int64(3434), 'Brian Head': np.int64(3213), 'Paragonah': np.int64(607), 'Kanarraville': np.int64(508)}
+PARCEL_ADD present but PARCEL_CITY null/blank                  10491
+Addresses with no digits                                       0
+Addresses ending in unusual punctuation                        0
+TAX_DISTRICT distinct                                          30
+TAX_DISTRICT length distribution                               {2: np.int64(65678), 4: np.int64(28)}
+TAX_DISTRICT examples                                          ['10', '10', '10', '07', '10', '10', '10', '10', '07', '07']
+CURRENT_ASOF distinct values                                   ['2024-07-18 00:00:00']
+ASSESSOR_SRC unique                                            1
+ASSESSOR_SRC sample                                            ['https://ironcounty.net/departments/assessor']
