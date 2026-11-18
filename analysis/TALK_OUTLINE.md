@@ -5,10 +5,10 @@
 **Last talk before break** — the room can't leave mid-talk, so there is a
 **formal 5-minute Q&A block** at the end; questions during content get parked
 ("hold that — I'll take it in the block"). Overrun, if any, spills into break.
-Plan **~2–3 min connect buffer at the top** — beats 1–2 run slides-only so the
-room never waits on the system. Audience: municipal/county/state GIS
+Plan **~2–3 min connect buffer at the top** — the opening runs slides-only so
+the room never waits on the system. Audience: municipal/county/state GIS
 professionals (Esri-centric). Nathan Thomas (Utah County, UGIC-2026 award
-project) is a personal friend — credit him by name in beat 2; confirm his
+project) is a personal friend — credit him by name in slide 6; confirm his
 project details with him before presenting.
 
 Thesis sentence (open it, land it, close it):
@@ -16,44 +16,45 @@ Thesis sentence (open it, land it, close it):
 > edges of QC — where the work is language — and deterministic checks and
 > humans stay in the middle. Utah's own rules already describe exactly this.*
 
-Timing math: **23:30 content** (safety beat joined at ~1:00) + connect buffer
+Timing math: **~24 min content** + connect buffer
 absorbed by the slides-only opening + **5:00 formal Q&A** = hard stop 11:20.
-Slide 5 ends the slides-only stretch (~8 min); live/notebook content begins at
-slide 8. Beat 13 (negative testing) is the first cut when running hot.
+Slides 1–8 are the slides-only spine (~9 min); live/notebook content begins at
+slide 9 (duplicate-IDs). Slide 13 (negative testing) is the first cut when
+running hot.
 
 ---
 
-## SLIDE LIST (15 slides — user order, deck_g5.pptx)
+## SLIDE LIST (15 slides — user order, deck_g5.pptx + deck_g5_beats2.pptx)
 
 | # | Slide ID | Slide title | Notes |
 |---|----------|-------------|-------|
 | 1 | TITLE | Trust but Verify | Holds while connecting |
 | 2 | PROBLEM | QC is an afterthought | Single panel: "QC is always the last step" — projects overrun, errors surface years later |
-| 3 | ECONOMICS | What if we keep the budget — and do 4–5× the checks? | Deterministic pipeline + "the LLM watches the edges" (now incl. domain recommendations + accurate metadata) |
+| 3 | ECONOMICS | What if we keep the budget — and do 4–5× the checks? | Deterministic pipeline + "the LLM watches the edges" (incl. domain recommendations + accurate metadata) |
 | 4 | SPECTRUM | Good at language. Bad at math — and at your actual workflows. So place it. | 5 stations + NEVER stamp |
-| 5 | SAFETY | It's safe because of what it can't do. | 3 guardrail cards: runs local · no tools/no internet · human sign-off + labeled records (GRAMA) |
+| 5 | SAFETY | It's safe because of what it can't do. | 3 guardrail cards: data boundary · reads/never writes · human sign-off + labeled records (GRAMA) |
 | 6 | UC-WORKFLOW | It already happened next door — built in-house. | Nathan Thomas credit; county as case study, not hook |
 | 7 | UC-NUMBERS | 56,993 properties. 86% never visited. | Stat tiles + $160K/yr |
 | 8 | MERCATOR | The LLM can name this trap. It must never do the math. | +59.3% bars; may/never cards |
 | 9 | DUPIDS | 71% of rows share a PARCEL_ID — so what? | 280 S MAIN ST: 7 rows, 7 real units |
 | 10 | GATE | The proposal is wrong. The gate catches it. | proposal JSON → G1 rejection → review table |
-| 11 | GATE-NUANCE | The gate isn't binary | E-0337 downgrade + A-0729 pending + 58-22-102 |
+| 11 | GATE-NUANCE | Reject, downgrade, approve-then-review. | E-0337 downgrade + A-0729 pending + 58-22-102 |
 | 12 | NOTES | What the 3pm map-tech actually sees | Two flag cards side by side |
-| 13 | NEGTEST | Flip it: the LLM audits your QC | **First cut** — corrupted-parcel gallery |
-| 14 | CHECKLIST | Five things every shop can do this month now seven | List + repriced-QC payoff |
-| 15 | CLOSE | "Human-guided. Documented. Data-untouched." | EO 2026-08 + thesis restate + contact |
+| 13 | NEGTEST | Flip it: the LLM audits your QC | **First cut** — ASK / INJECT / RUN |
+| 14 | CHECKLIST | Seven things your shop can do this month | List + repriced-QC payoff |
+| 15 | CLOSE | The model works the edges; the checks and humans stay in the middle | EO 2026-08 + thesis restate + contact |
 
 ---
 
-## RUN OF SHOW — beat by beat
+## RUN OF SHOW — slide by slide
 
-### Beat 0 — Title (0:00–0:00, slide 1)
+### Slide 1 — Title (0:00)
 Holds on screen while the previous talk ends and you plug in. Put
 `gemma4:12b · Ollama · ArcGIS Pro 3.7` small at the bottom — your credibility
 stack, visible before you speak.
 
-### Beat 1 — The problem: priced by leftovers (2:00, slides 2–3) *slides-only*
-- **Cold open (consultant authority, ~90s script):**
+### Slides 2–3 — The problem: priced by leftovers (2:00) *slides-only*
+- **Slide 2 (cold open, consultant authority, ~90s script):**
   - "The 5-year cycle is hard — that's true, but it's not the real problem."
   - "The costs of bad data are *diffuse*. A wrong acreage lands on an
     appraiser's desk, a stale address on dispatch, a duplicated parcel in a
@@ -65,46 +66,18 @@ stack, visible before you speak.
     same problems. Often the second or **third invoice** for one data issue:
     once to create it, once to discover it, once to fix it. That's data debt
     compounding — at consultant rates."
+  - Transition: "So I'm not here to sell a philosophy — here's the pitch."
 - **Slide 3 (the promise, ~30s):** "So I'm not here to sell a philosophy. The
   LLM changes the unit economics: it collapses the cost of the language-shaped
   parts of QC — reading the spec, drafting the check, writing the memo. The
   deterministic checks those feed stop competing with essential projects.
   Same 20 hours, four or five times the checks. That's the whole pitch."
-- **Transition:** "And this isn't hypothetical in Utah. It already happened
-  next door."
-- Deliver anecdote with anonymized clients ("a mountain-west county").
+- **Transition:** "The LLM works the edges. The real question is where,
+  exactly."
+- Deliver the anecdote with anonymized clients ("a mountain-west county").
 - Watch: keep this tight; slack is nearly zero.
 
-### Beat 2 — The county as case study, not hook (slides 6–7, ~3:00) *slides-only*
-*(User decision: Utah County serves better as evidence after the placement and
-safety questions than as an opening lead. The spoken content carries over from
-the original beat 2; give Nathan the nod when slide 6 lands.)*
-
-### Beat 4 — Safety (slide 5, ~1:00) *(reworded per user 2026-11-18)*
-Three guardrails, each enforced by code: **data boundary** — the model
-*has* to read the data and the specs; it runs where you control the boundary
-(workstation **or a private, secure cloud**, e.g. a hosted Ollama) ·
-**reads, never writes** — read access yes, write access / network / acting
-tools no; proposals only, and the failed agent-harness anecdote lands live
-here · **human sign-off + labeled records** (GRAMA). Close with: "The
-guardrails aren't policy — they're the design." (Spectrum zone 1 footer
-matches: *reads everything — writes nothing*.)
-- **Slide 4:** Utah County GIS Division built it themselves, no vendor:
-  aerial imagery → AI building-footprint detection → compare against assessor
-  building sketches → match scores in ArcGIS Pro → green/yellow/red →
-  web app (Maps SDK for JavaScript). **"My friend Nathan Thomas built this"** —
-  give him the nod in the room.
-- **Slide 5:** 56,993 properties approaching reassessment · 48,846 strong
-  matches (86% ruled out) · 7,494 flagged for review · 653 field-inspection
-  candidates · ~$160K/yr outsourcing eliminated · UGIC 2026 award.
-- **Land the pattern, ~30s:** "Notice what the AI did *not* do: it didn't
-  value property. It didn't decide anything. It drafted the review queue —
-  the appraiser still makes the call. Hold that shape; it's everything."
-- **Transition:** "That's computer vision — narrow, trained, purpose-built.
-  The LLM is a different beast with different powers and different failure
-  modes. Which raises the actual question of this talk—" → spectrum.
-
-### Beat 3 — The spectrum: where should the LLM sit? (3:00, slide 6, builds ×3)
+### Slide 4 — The spectrum: where should the LLM sit? (3:00, builds ×3)
 - Build 1 — **Outside the pipeline:** reading documents — state schemas, data
   dictionaries, policy PDFs → gap reports and checklists. No data touched.
 - Build 2 — **The input edge:** drafting checks. Analyst says it in English;
@@ -118,10 +91,39 @@ matches: *reads everything — writes nothing*.)
 - **Key line:** "The LLM is good at language and meaning, bad at math and
   geometry. QC problems that are language problems — give to it. QC problems
   that are math problems — never."
-- **Transition:** "Everything I show you now sits on that map. First, the
-  clearest case of a check that must never leave deterministic code."
+- **Transition:** "Which raises the question everyone asks first — how do you
+  do this safely?"
 
-### Beat 4 — Beat 1, Web Mercator trap (2:00, slide 7) *output/chart slide*
+### Slide 5 — Safety (1:00)
+Three guardrails, each enforced by code: **data boundary** — the model
+*has* to read the data and the specs; it runs where you control the boundary
+(workstation **or a private, secure cloud**, e.g. a hosted Ollama) ·
+**reads, never writes** — read access yes, write access / network / acting
+tools no; proposals only, and the failed agent-harness anecdote lands live
+here · **human sign-off + labeled records** (GRAMA). Close with: "The
+guardrails aren't policy — they're the design." (Spectrum zone 1 footer
+matches: *reads everything — writes nothing*.)
+- **Transition:** "And this isn't hypothetical in Utah — it already happened
+  next door."
+
+### Slides 6–7 — Utah County: it already happened next door (3:00) *slides-only*
+- **Slide 6:** Utah County GIS Division built it themselves, no vendor:
+  aerial imagery → AI building-footprint detection → compare against assessor
+  building sketches → match scores in ArcGIS Pro → green/yellow/red →
+  web app (Maps SDK for JavaScript). **"My friend Nathan Thomas built this"** —
+  give him the nod in the room.
+- **Slide 7:** 56,993 properties approaching reassessment · 48,846 strong
+  matches (86% ruled out) · 7,494 flagged for review · 653 field-inspection
+  candidates · ~$160K/yr outsourcing eliminated · UGIC 2026 award.
+- **Land the pattern, ~30s:** "Notice what the AI did *not* do: it didn't
+  value property. It didn't decide anything. It drafted the review queue —
+  the appraiser still makes the call. Hold that shape; it's everything."
+- **Transition:** "That's computer vision — narrow, trained, purpose-built.
+  The LLM is a different beast with different powers and different failure
+  modes. First, the clearest case of a check that must never leave
+  deterministic code."
+
+### Slide 8 — Web Mercator trap (2:00) *output/chart slide, not live*
 - State the fact: countywide parcels in native CRS inflate area **+59.3%**
   vs EPSG:5070 (Albers). Acreage comparisons against stated values are garbage
   until reprojected.
@@ -135,8 +137,8 @@ matches: *reads everything — writes nothing*.)
 - **Transition:** "Now the harder case — the one where the LLM has an
   opinion, and the opinion is *confident, plausible, and wrong.*"
 
-### Beat 5 — Beat 2, duplicate-ID ≠ duplicate parcel (3:00, slides 8–9)
-- **Slide 8 (evidence):** Kanarraville subset, 508 rows: **71.3% share a
+### Slide 9 — Duplicate-ID ≠ duplicate parcel (2:00) *live begins here*
+- **Evidence:** Kanarraville subset, 508 rows: **71.3% share a
   PARCEL_ID**, 69.7% duplicate geometries — but the parcel is fine. 280 S
   MAIN ST: 7 rows, same parcel, `HOUSE_CNT = 7`, each row a real unit
   (varying `BLDG_SQFT`, `BUILT_YR`, `CONST_MATERIAL`). Zero cross-parcel
@@ -145,7 +147,11 @@ matches: *reads everything — writes nothing*.)
 - **Live notebook (or pre-run cell-output slides):** local model
   (`gemma4:12b`, Ollama, JSON-schema output, ~11 s a batch) sees the sample
   rows and confidently proposes `merge_rows` on the 280 S MAIN ST group.
-- **Slide 9:** gate rule **G1 rejects it** — the 7 rows are real units, not
+- **Transition:** "The model looks at this and has an opinion. Watch the
+  gate."
+
+### Slide 10 — The gate catches it (1:00 — slides 9–10 are one 3:00 beat)
+- Gate rule **G1 rejects it** — the 7 rows are real units, not
   duplicates. Show the review table: 1 G1 rejection, 1 G5 downgrade, 5 G7
   accepts.
 - **Key line:** "A wrong proposal costs seconds to generate and one review
@@ -154,7 +160,7 @@ matches: *reads everything — writes nothing*.)
 - **Transition:** "And the gate isn't a wall — it has nuance. Three outcomes,
   not two."
 
-### Beat 6 — Beat 3, the gate decides (3:00, slide 10)
+### Slide 11 — The gate isn't binary (3:00)
 - **E-0337-0002-00R1:** stated 10.11 ac vs 0.885 mapped (11.4×) — the gate
   doesn't reject, it **downgrades** (G5): pattern matches a clipped/part
   footprint, so "fix the acreage" is the *wrong* fix. Human review order
@@ -170,7 +176,7 @@ matches: *reads everything — writes nothing*.)
   LLM never sees or influences. That's what 'deterministic gate' means in
   practice."
 
-### Beat 7 — Beat 4, what the 3pm map-tech sees (2:30, slide 11) *pre-generated*
+### Slide 12 — What the 3pm map-tech sees (2:30) *pre-generated*
 - Show two flag cards side by side, prose **pre-generated from the real audit
   CSV** (not live):
   - **A-0729** (real entry error): "stated 0.988 ≈ 2× mapped 0.491; boundary
@@ -189,8 +195,9 @@ matches: *reads everything — writes nothing*.)
   GRAMA — archive it like any other record.
 - **Key line:** "This is the part your reviewers will use and love — and it
   is the one place in the pipeline where the LLM literally cannot do damage."
+- **Transition:** "Trust but verify — applied to the verifier."
 
-### Beat 8 — Beat 5, flip it: the LLM audits your QC (1:30, slide 12; FIRST CUT if hot)
+### Slide 13 — Flip it: the LLM audits your QC (1:30; FIRST CUT if hot)
 - Invert the pipeline: LLM generates plausible-but-corrupted parcels (swapped
   acreages, impossible build dates, missing units, transposed digits),
   injected programmatically, and you check: did the checks catch them?
@@ -200,22 +207,27 @@ matches: *reads everything — writes nothing*.)
 - **Key line:** "Trust but verify — applied to the verifier."
 - HOT: compress to one spoken line + slide left unread.
 
-### Beat 9 — Take-home: QC scoped by risk, priced in minutes (2:00, slide 13; flexes to 1:30)
-- Five adoptable-Monday items, each mapped to the spectrum:
+### Slide 14 — Take-home: QC scoped by risk, priced in minutes (2:00; flexes to 1:30)
+- Seven adoptable-Monday items, each mapped to the spectrum:
   1. **Spec reconciliation** — feed the state schema / your data dictionary to
      the LLM → gap report (missing fields, population rates vs requirements).
   2. **English → Arcade** — plain-language check described; candidate Arcade
      attribute rule drafted; human reviews and owns it.
   3. **Text QC** — situs addresses, owner names: normalization and borderline
      pair adjudication, suggestions-with-evidence only.
-  4. **Triage memos** — verified findings → readable, prioritized English for
+  4. **Domain + metadata** — better domain recommendations and accurate
+     metadata from verified usage.
+  5. **Triage memos** — verified findings → readable, prioritized English for
      the supervisor.
-  5. **Per-finding notes** — beat 7's card in every review queue.
-- **Payoff line (closes beat 1's promise):** "The 20-hour cap stops being the
+  6. **Per-finding notes** — slide 12's card in every review queue.
+  7. **Negative testing** — one adversarial pass against your own checks.
+- **Payoff line (closes slide 3's promise):** "The 20-hour cap stops being the
   ceiling. The language-shaped parts stopped being hourly labor. QC finally
   gets scoped by risk, priced in minutes — and stops losing the budget fight."
+- **Transition:** "None of this needs permission beyond a conversation with
+  your county attorney and IT."
 
-### Beat 10 — Compliance in one slide + close (1:30, slide 14) — thesis lands here, then hand off to the Q&A block
+### Slide 15 — Compliance in one slide + close (1:30) — thesis lands here, then hand off to the Q&A block
 - **EO 2026-08 (Oct 2026, Gov. Cox):** human-guided, documented AI
   integration, human-in-the-loop review for determinations affecting rights.
   "Utah's rules already describe this architecture. We're not asking
@@ -233,8 +245,8 @@ matches: *reads everything — writes nothing*.)
   the deep ones ("find me at the break — I'm buying coffee"). Being last
   before break means no one leaves: you can safely run to 11:19.
 - **Most likely questions, in asking order:**
-  1. *"What if the model is wrong?"* — beat 5 already answered this on stage;
-     point back at the gate rejection rather than re-theorizing.
+  1. *"What if the model is wrong?"* — slide 10 already answered this on
+     stage; point back at the gate rejection rather than re-theorizing.
   2. *"Is this legal in Utah?"* — answer in three clauses: surveying law
      gates geometry (58-22-102), GRAMA/GDPA makes the notes records (label
      and archive), DTS approved-tools applies to state employees (local
@@ -271,48 +283,49 @@ matches: *reads everything — writes nothing*.)
 - **"What does this cost?"** — One GPU-class workstation (12 GB VRAM class
   runs it), open weights, no per-token spend; the cost is prompt engineering
   and review discipline, which you can see in the notebook.
-- **"What if the model is wrong?"** — It was (beat 5). Show the gate doing its
+- **"What if the model is wrong?"** — It was (slide 10). Show the gate doing its
   job; that *is* the answer to the question.
 
 ## Contingencies
 
 | Risk | Response |
 |------|----------|
-| Pro/arcpy won't cooperate | Slides 8–9 hold pre-run cell outputs; beats 5–6 become a narrated slide walk |
-| Running hot (>2 min behind by beat 8) | Beat 8 → one line with slide unread; beat 9 → two items + payoff line; connect buffer already covered at the top |
-| Room is skeptical/hostile on AI | Lean harder on beats 2 (Utah County precedent) and 6 (surveying law); LLM shown only in gated/advisory roles |
+| Pro/arcpy won't cooperate | Slides 9–10 hold pre-run cell outputs; they become a narrated slide walk |
+| Running hot (>2 min behind by slide 8) | Slide 13 (negative testing) → one line with slide unread; slide 14 (take-home) → two items + payoff line; connect buffer already covered at the top |
+| Room is skeptical/hostile on AI | Lean harder on slides 6–7 (Utah County precedent) and slide 11 (surveying law); LLM shown only in gated/advisory roles |
 | "Can I get this?" | Notebook, audit CSV/patch JSON, and all docs are in the repo; DATA_LICENSE covers redistribution (CC BY 4.0) |
 
 ## Demo plan
 
-- **First ~6 minutes (beats 1–2) are slides-only** — the connect buffer never
-  delays the room; live/notebook content begins at beat 5.
-- Primary: `qc_demo.ipynb` beats 5–6 in ArcGIS Pro; beat 4 is a chart slide.
-- Beat 7 notes pre-generated from `analysis/qc_audit_20261117_143020.csv`.
+- **First ~9 minutes (slides 1–8) are slides-only** — the connect buffer never
+  delays the room; live/notebook content begins at slide 9.
+- Primary: `qc_demo.ipynb` slides 9–10 in ArcGIS Pro; slide 8 is a chart slide.
+- Slide 12 notes pre-generated from `analysis/qc_audit_20261117_143020.csv`.
 - **Backup: screen-capture recording of the notebook run** + cell-output
-  slides for beats 5–6, ready to switch mid-sentence.
+  slides for slides 9–10, ready to switch mid-sentence.
 
 ## Build checklist (ordered, talk at 10:50)
 
-1. Slides 1–7 (beats 1–4) — the no-live-content spine.
-2. Beat 7's two flag cards generated from the audit CSV.
-3. Slides 8–10 with pre-run cell outputs as the fallback variant.
-4. Beat 8 gallery (or its one-line fallback).
-5. Slides 13–14 + Q&A back-pocket one-pager.
+1. Slides 1–8 — the no-live-content spine.
+2. Slide 12's two flag cards generated from the audit CSV.
+3. Slides 9–10 with pre-run cell outputs as the fallback variant.
+4. Slide 13's negative-testing beat (or its one-line fallback).
+5. Slides 14–15 + Q&A back-pocket one-pager.
 6. Screen-capture backup of the notebook run.
 7. Optional: verify notebook runs in Pro's Notebooks pane.
 
 ## Decisions this outline locks
 
-- **Formal 5:00 Q&A at the end** — content is 23:30; questions during content
+- **Formal 5:00 Q&A at the end** — content is ~24 min; questions during content
   get parked to the block. Last-before-break placement makes 11:20 the soft
   edge (overrun = break time), but plan against it.
 - **User narrative order (2026-11-18):** Utah County is a *case study after
-  the placement + safety questions*, not a lead. New **Safety beat** (slide 5)
+  the placement + safety questions*, not a lead. New **Safety slide** (5)
   drafted from the compliance scan; deck total is now **15 slides**, counters
   `n / 15`.
 - Keep the existing notebook as-is; proposals→gate flow presented as designed
   (hypothesis vs decision), not rebuilt as rule-authoring.
-- Rule-authoring reframe lives in beat 9 as a take-home, not a notebook rebuild.
+- Rule-authoring reframe lives in slide 14 as a take-home, not a notebook
+  rebuild.
 - Per-finding explanations pre-generated; no live prompting on stage.
-- Nathan's Utah County project is beat 2 with on-stage credit.
+- Nathan's Utah County project is slides 6–7 with on-stage credit.
