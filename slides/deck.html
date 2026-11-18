@@ -1,0 +1,670 @@
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Trust but Verify</title>
+
+<style>
+  /* ————————————————————————————————————————————————
+     Design plan — stage deck for a GIS data-QC talk.
+     Subject world: cadastral survey records / map sheets.
+     Single committed dark "map table" look for projection.
+
+     color: --bg ink slate · --fg warm paper · --accent survey
+     orange · --good/--warn/--bad reserved for the green-yellow-
+     red score system · --line hairlines & graticule
+     type:  Archivo (display, tracked) · Inter (body) ·
+            IBM Plex Mono (coordinates, eyebrows, data)
+     layout: 16:9 stage box letterboxed center, all type in
+     container-query units so one size rule fits every screen.
+     ———————————————————————————————————————————————— */
+  @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root {
+    --bg:        #12151A;
+    --panel:     #1A1F26;
+    --panel-2:   #222933;
+    --fg:        #ECE7DE;
+    --muted:     #99A2AD;
+    --faint:     #6B7480;
+    --line:      #2B333D;
+    --grat:      #20272F;
+    --accent:    #E8862B;
+    --accent-dim:#8a5320;
+    --good:      #4FA862;
+    --warn:      #DFAF3B;
+    --bad:       #D4574E;
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; margin: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Inter', system-ui, sans-serif;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-left:  max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    padding-block: max(12px, env(safe-area-inset-top, 0px)) max(12px, env(safe-area-inset-bottom, 0px));
+  }
+
+  /* ——— 16:9 stage, all slide type sized in cqw ——— */
+  .stage {
+    width: min(100%, calc((100dvh - 90px) * 16 / 9));
+    aspect-ratio: 16 / 9;
+    container-type: inline-size;
+    position: relative;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    overflow: hidden;
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    padding: 3.2cqw 3.8cqw;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .18s ease;
+  }
+  @media (prefers-reduced-motion: reduce) { .slide { transition: none; } }
+
+  /* graticule backdrop (title + accent slides only) */
+  .grat::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(var(--grat) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grat) 1px, transparent 1px);
+    background-size: 8.3cqw 8.3cqw;
+    mask-image: radial-gradient(ellipse 90% 90% at 50% 45%, #000 30%, transparent 78%);
+    pointer-events: none;
+  }
+
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1.15cqw;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--faint);
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.6cqw;
+  }
+  .eyebrow .no { color: var(--accent); }
+
+  h1, h2 { font-family: 'Archivo', 'Inter', sans-serif; text-wrap: balance; }
+  h2 {
+    font-size: 3.4cqw;
+    font-weight: 800;
+    letter-spacing: -.01em;
+    line-height: 1.06;
+    margin-bottom: 1.4cqw;
+  }
+  h2 em { font-style: normal; color: var(--accent); }
+  .lede { font-size: 1.55cqw; color: var(--muted); max-width: 62%; line-height: 1.5; }
+
+  .body-copy { font-size: 1.45cqw; line-height: 1.55; color: var(--fg); }
+  .body-copy strong { font-weight: 700; }
+  .mono { font-family: 'IBM Plex Mono', monospace; }
+
+  /* cards & panels */
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    padding: 2cqw;
+    min-width: 0;
+  }
+  .panel h3 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1.1cqw;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.1cqw;
+    font-weight: 600;
+  }
+
+  .pull {
+    border-left: 0.28cqw solid var(--accent);
+    padding: 0.4cqw 0 0.4cqw 1.4cqw;
+    margin: 1.2cqw 0;
+  }
+  .pull p { font-family: 'Archivo', sans-serif; font-size: 2.0cqw; font-weight: 700; line-height: 1.25; }
+  .pull cite { display: block; font-style: normal; font-size: 1.0cqw; color: var(--faint); margin-top: .5cqw;
+               font-family: 'IBM Plex Mono', monospace; letter-spacing: .08em; }
+
+  ul.list { list-style: none; display: grid; gap: .8cqw; }
+  ul.list li {
+    padding-left: 1.5cqw;
+    position: relative;
+    font-size: 1.35cqw;
+    line-height: 1.45;
+    color: var(--fg);
+  }
+  ul.list li::before {
+    content: "";
+    position: absolute; left: 0; top: .62cqw;
+    width: .55cqw; height: .55cqw;
+    background: var(--accent);
+  }
+  ul.list li span.dim { color: var(--muted); }
+
+  .kbd-note {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1.05cqw;
+    color: var(--faint);
+    letter-spacing: .12em;
+  }
+
+  footer.bar {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1.0cqw;
+    letter-spacing: .14em;
+    color: var(--faint);
+    text-transform: uppercase;
+    border-top: 1px solid var(--line);
+    padding-top: 1cqw;
+  }
+
+  /* ——— slides 2/3 grid rows ——— */
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 2cqw; min-width: 0; }
+  .cols.tall .panel { min-height: 31cqw; }
+  .verdict {
+    margin-top: 1.8cqw;
+    border: 1px solid var(--accent-dim);
+    background: color-mix(in oklab, var(--accent) 7%, var(--bg));
+    padding: 1.3cqw 1.8cqw;
+    font-size: 1.4cqw;
+    line-height: 1.45;
+  }
+  .verdict strong { color: var(--accent); font-weight: 700; }
+
+  .beforeafter { display: grid; grid-template-columns: 1fr 3.4cqw 1fr; gap: 1.4cqw; align-items: stretch; }
+  .arrowcol { display: flex; align-items: center; justify-content: center; color: var(--accent); font-size: 2.6cqw; font-weight: 800; }
+
+  /* ——— slide 4: flow SVG sizing ——— */
+  figure.flow { margin: 0; display: flex; flex-direction: column; gap: .8cqw; }
+  figure.flow svg { width: 100%; height: auto; display: block; }
+  figure.flow figcaption { font-size: 1.2cqw; color: var(--muted); line-height: 1.45; }
+  figure.flow figcaption b { color: var(--fg); font-weight: 600; }
+
+  /* ——— slide 5: stat tiles ——— */
+  .tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.6cqw; }
+  .tile { background: var(--panel); border: 1px solid var(--line); padding: 1.6cqw 1.6cqw 1.4cqw; min-width: 0; }
+  .tile .n {
+    font-family: 'Archivo', sans-serif;
+    font-size: 4.0cqw; font-weight: 900; letter-spacing: -.02em;
+    color: var(--fg); font-variant-numeric: tabular-nums; line-height: 1;
+  }
+  .tile .n small { font-size: 1.9cqw; font-weight: 700; color: var(--muted); margin-left: .3cqw; }
+  .tile.hot .n { color: var(--accent); }
+  .tile .l { margin-top: .8cqw; font-size: 1.22cqw; line-height: 1.4; color: var(--muted); }
+  .wide-tiles { display: grid; grid-template-columns: 1.35fr 1fr; gap: 1.6cqw; margin-top: 1.6cqw; }
+
+  /* ——— slide 6: spectrum stations (HTML diagram) ——— */
+  .spectrum {
+    margin-top: 1cqw;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.12fr 1fr 1fr;
+    gap: 1.1cqw;
+    align-items: stretch;
+  }
+  .station {
+    border: 1px solid var(--line);
+    background: var(--panel);
+    padding: 1.3cqw 1.2cqw;
+    min-width: 0;
+    display: flex; flex-direction: column; gap: .55cqw;
+    transition: border-color .2s, box-shadow .2s;
+  }
+  .station .tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .95cqw; letter-spacing: .16em; text-transform: uppercase; color: var(--faint);
+  }
+  .station .name { font-family: 'Archivo', sans-serif; font-size: 1.55cqw; font-weight: 800; line-height: 1.15; }
+  .station .desc { font-size: 1.08cqw; line-height: 1.42; color: var(--muted); }
+  .station .who { margin-top: auto; font-family: 'IBM Plex Mono', monospace; font-size: .92cqw; letter-spacing: .08em; color: var(--faint); }
+  .station.llm.on { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+  .station.llm .who { color: var(--accent); }
+  .station.core { background: var(--panel-2); }
+  .station.core .name { color: var(--fg); }
+
+  /* the build reveal: steps above the initial one start hidden */
+  .slide [data-build] { }
+  .slide [data-build].pending { opacity: 0; }
+  .slide [data-build]:not(.pending) { opacity: 1; }
+  .slide [data-build] { transition: opacity .25s ease; }
+  @media (prefers-reduced-motion: reduce) { .slide [data-build] { transition: none; } }
+
+  .stamp {
+    align-self: center;
+    justify-self: center;
+    border: .22cqw solid var(--bad);
+    color: var(--bad);
+    font-family: 'Archivo', sans-serif;
+    font-weight: 900; font-size: 1.7cqw; letter-spacing: .3em;
+    padding: .45cqw 1.1cqw .45cqw 1.4cqw;
+    transform: rotate(-7deg);
+    background: color-mix(in oklab, var(--bad) 10%, var(--bg));
+  }
+  .spectrum-bracket {
+    margin-top: 1.2cqw;
+    height: 2.1cqw;
+    position: relative;
+  }
+  .llm-brace {
+    position: absolute; top: 0; height: 100%;
+    border: 1px solid var(--accent);
+    border-bottom: none;
+    display: flex; align-items: flex-start; justify-content: center;
+    padding-top: .25cqw;
+    transition: opacity .25s;
+  }
+  .llm-brace span {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .95cqw; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--accent);
+    background: var(--bg);
+    padding: 0 .7cqw;
+    white-space: nowrap;
+  }
+
+  /* ——— slide 7: bars ——— */
+  .chartwrap { display: grid; grid-template-columns: 1.25fr 1fr; gap: 2.2cqw; min-width: 0; align-items: start; }
+  .barrow { display: grid; grid-template-columns: 15cqw 1fr; gap: 1.2cqw; align-items: center; margin-bottom: 1.5cqw; min-width: 0; }
+  .barlabel { font-size: 1.25cqw; line-height: 1.35; color: var(--fg); min-width: 0; text-align: right; }
+  .barlabel small { display: block; font-family: 'IBM Plex Mono', monospace; font-size: .95cqw; color: var(--faint); }
+  .bartrack { position: relative; height: 3.3cqw; background: var(--panel); border: 1px solid var(--line); min-width: 0; }
+  .barfill { position: absolute; inset: 0 auto 0 0; background: var(--accent); opacity: .92; }
+  .barfill.base { background: var(--muted); opacity: .55; }
+  .barval {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    font-family: 'IBM Plex Mono', monospace; font-size: 1.3cqw; font-weight: 600; color: var(--fg);
+    padding-left: .8cqw; white-space: nowrap;
+  }
+  .delta-note { margin-top: .5cqw; font-size: 1.15cqw; color: var(--muted); line-height: 1.5; }
+  .delta-note b { color: var(--accent); }
+
+  .rulecard { display: grid; gap: 1.1cqw; }
+  .rule { border: 1px solid var(--line); background: var(--panel); padding: 1.2cqw 1.4cqw; }
+  .rule .k { font-family: 'IBM Plex Mono', monospace; font-size: .95cqw; letter-spacing: .16em; text-transform: uppercase; margin-bottom: .45cqw; }
+  .rule.may .k { color: var(--good); }
+  .rule.never .k { color: var(--bad); }
+  .rule p { font-size: 1.25cqw; line-height: 1.5; color: var(--fg); }
+
+  /* ——— controls under the stage ——— */
+  .controls {
+    width: min(100%, calc((100dvh - 90px) * 16 / 9));
+    display: flex; align-items: center; gap: 10px;
+    margin-top: 10px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .controls button {
+    background: var(--panel); color: var(--fg);
+    border: 1px solid var(--line);
+    font: inherit; padding: 5px 12px;
+    cursor: pointer;
+  }
+  .controls button:hover { border-color: var(--accent); }
+  .controls button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .controls .count { margin-left: auto; letter-spacing: .1em; }
+  .controls .hint { color: var(--faint); }
+  @media (max-width: 640px) { .controls .hint { display: none; } }
+</style>
+
+<div class="stage" id="stage">
+
+<!--
+  ════════════════════════════════════════════════════════════
+  HOW TO EDIT THIS FILE
+  Safe to change (plain text between tags):
+    • anything inside <h2>…</h2>, <li>…</li>, <p>…</p>,
+      <span>…</span>, panel <h3> headings, pull-quote <p> lines
+    • the eyebrow labels (first <span> in each .eyebrow line)
+  Rules of thumb:
+    • one bullet = one <li> line; keep text on a single line
+    • don't add or remove HTML tags, only their text
+    • don't touch: style="…" attributes, cqw numbers, the whole
+      <script> block at the bottom, and the slide-4 <svg>
+    • <em>…</em> inside an <h2> renders in the orange accent
+  After saving: switch to the browser window and press F5.
+  ════════════════════════════════════════════════════════════
+-->
+
+  <!-- ═══ 1 · TITLE ═══  (name / subtitle / footer text are editable) -->
+  <section class="slide grat" data-slide="1">
+    <div class="eyebrow"><span></span><span class="no">01 / 07</span></div>
+    <div style="margin:auto 0 4.5cqw;">
+      <p class="mono" style="font-size:1.5cqw; color:var(--accent); letter-spacing:.3em; margin-bottom:2cqw;">37°39′N&nbsp;&nbsp;113°15′W · KANARRAVILLE, UTAH</p>
+      <h1 style="font-size:9.2cqw; font-weight:900; letter-spacing:-.015em; line-height:1; margin-bottom:1.8cqw;">TRUST<br>BUT VERIFY</h1>
+      <p style="font-size:2.1cqw; color:var(--muted); font-weight:500; max-width:64%; line-height:1.45;">LLM-assisted GIS data QC — the model works the edges. The checks and the humans stay in the middle.</p>
+    </div>
+    <footer class="bar">
+      <span>Robert McCleary · GIS Analyst, Sunrise Engineering</span>
+      <span>gemma4:12b · Ollama · ArcGIS Pro 3.7 · UGRC parcels (CC BY 4.0)</span>
+    </footer>
+  </section>
+
+  <!-- ═══ 2 · PROBLEM ═══ -->
+  <section class="slide" data-slide="2">
+    <div class="eyebrow"><span>The problem</span><span class="no">02 / 07</span></div>
+    <h2><em>QC is an afterthought.</em></h2>
+    <div class="cols tall">
+      <div class="panel">
+        <h3>The cost of bad data</h3>
+        <ul class="list">
+          <li>A wrong acreage sends the appraiser back out.</li>
+          <li>A stale address sends dispatch to the wrong door.</li>
+          <li>A duplicate parcel puts two bills in a resident’s mailbox.</li>
+        </ul>
+        <ul class="list" style="margin-top:1.2cqw;">
+          <li>Different desks absorb all of it. No one adds it up.</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h3>The cost of doing QC</h3>
+        <div class="pull">
+          <p>“Do the best you can<br>do in 20 hours.”</p>
+          <cite>— the scope, every time</cite>
+        </div>
+        <ul class="list">
+          <li>20 hours was the leftover. Never the size of the problem.</li>
+          <li>Essential projects go first. QC waits.</li>
+          <li>Next quarter, nothing has changed.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 3 · ECONOMICS ═══ -->
+  <section class="slide" data-slide="3">
+    <div class="eyebrow"><span>The pitch — economics, not philosophy</span><span class="no">03 / 07</span></div>
+    <h2>Same 20 hours. <em>4–5× the checks.</em></h2>
+    <div class="beforeafter">
+      <div class="panel">
+        <h3>Today — QC sized to slack</h3>
+        <ul class="list">
+          <li>specs read by eye, <span class="dim">if ever</span></li>
+          <li>Arcade &amp; SQL checks hand-written</li>
+          <li>findings explained from scratch, after hours</li>
+          <li>so the checks compete with <span class="dim">every essential project</span></li>
+        </ul>
+      </div>
+      <div class="arrowcol">→</div>
+      <div class="panel" style="border-color: var(--accent-dim);">
+        <h3>With the LLM at the edges</h3>
+        <ul class="list">
+          <li>it reads the spec → gap report, <span class="dim">in minutes</span></li>
+          <li>drafts the check → <span class="mono" style="color:var(--muted)">human reviews, owns it</span></li>
+          <li>verified findings → memos &amp; explanations, written</li>
+          <li>deterministic checks <span class="dim">stop competing — they run</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="verdict">The language-shaped parts stop being hourly labor. <strong>QC finally gets scoped by risk — priced in minutes.</strong> And the deal stays closed: the model never touches the geometry, never makes the decision.</div>
+  </section>
+
+  <!-- ═══ 4 · UTAH COUNTY WORKFLOW ═══ -->
+  <section class="slide" data-slide="4">
+    <div class="eyebrow"><span>Utah County · property assessment</span><span class="no">04 / 07</span></div>
+    <h2>It already happened <em>next door</em> — built in-house.</h2>
+    <figure class="flow">
+      <svg viewBox="0 0 1240 400" role="img" aria-label="Utah County workflow: aerial imagery feeds an in-house model that detects building footprints; ArcGIS Pro scores them against assessor sketches to green, yellow or red; those land in a staff web app where an appraiser makes the determination.">
+        <defs>
+          <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <polygon points="0 0, 10 5, 0 10" fill="currentColor"></polygon>
+          </marker>
+          <style>
+            .bx   { fill: #1A1F26; stroke: #2B333D; stroke-width: 1.2; }
+            .bxa  { fill: #1A1F26; stroke: #E8862B; stroke-width: 1.2; }
+            .txt  { fill: #ECE7DE; font: 600 15px Inter, sans-serif; }
+            .sub  { fill: #99A2AD; font: 400 12px Inter, sans-serif; }
+            .mono { fill: #6B7480; font: 500 10.5px 'IBM Plex Mono', monospace; letter-spacing: 1.4px; }
+            .ln   { stroke: #99A2AD; stroke-width: 1.4; fill: none; }
+            .lbl  { fill: #99A2AD; font: 400 11.5px Inter, sans-serif; }
+          </style>
+        </defs>
+
+        <!-- row 1 : y 24 … 110 -->
+        <g>
+          <rect class="bx" x="24" y="24" width="232" height="86"></rect>
+          <text class="mono" x="40" y="50">INPUT</text>
+          <text class="txt"  x="40" y="76">High-res aerial imagery</text>
+          <text class="sub"  x="40" y="96">countywide, current year</text>
+
+          <line class="ln" x1="256" y1="67" x2="316" y2="67" marker-end="url(#ah)"></line>
+          <text class="lbl" x="262" y="60">pixels in</text>
+
+          <rect class="bxa" x="322" y="24" width="268" height="86"></rect>
+          <text class="mono" x="338" y="50">IN-HOUSE MODEL · NO VENDOR</text>
+          <text class="txt"  x="338" y="76">Building-footprint detection</text>
+          <text class="sub"  x="338" y="96">computer vision on imagery</text>
+
+          <line class="ln" x1="590" y1="67" x2="650" y2="67" marker-end="url(#ah)"></line>
+          <text class="lbl" x="596" y="60">footprints</text>
+
+          <rect class="bx" x="656" y="24" width="264" height="86"></rect>
+          <text class="mono" x="672" y="50">IN ARCGIS PRO</text>
+          <text class="txt"  x="672" y="76">Compare vs sketches</text>
+          <text class="sub"  x="672" y="96">sketches set taxable sq ft</text>
+
+          <line class="ln" x1="920" y1="67" x2="980" y2="67" marker-end="url(#ah)"></line>
+          <text class="lbl" x="926" y="60">scored</text>
+
+          <rect class="bx" x="986" y="24" width="230" height="86"></rect>
+          <text class="mono" x="1002" y="50">OUTCOME · PRO + ONLINE</text>
+          <text class="txt"  x="1002" y="76">Green / yellow / red</text>
+          <circle cx="1010" cy="92" r="5" fill="#4FA862"></circle>
+          <circle cx="1028" cy="92" r="5" fill="#DFAF3B"></circle>
+          <circle cx="1046" cy="92" r="5" fill="#D4574E"></circle>
+          <text class="lbl" x="1058" y="95.5">match scores</text>
+        </g>
+
+        <!-- down to the human -->
+        <path class="ln" d="M 1101 110 L 1101 148 L 680 148 L 680 172" marker-end="url(#ah)"></path>
+        <text class="lbl" x="690" y="143">published to ArcGIS Online → staff web app (Maps SDK for JS)</text>
+
+        <!-- row 2 : the determination -->
+        <rect class="bxa" x="530" y="176" width="300" height="88"></rect>
+        <text class="mono" x="546" y="204">THE DETERMINATION</text>
+        <text class="txt"  x="546" y="232">The appraiser decides</text>
+        <text class="sub"  x="546" y="252">valuation · inspection · sign-off</text>
+
+        <!-- boundary annotation: no model here -->
+        <path d="M 530 220 L 140 220 L 140 116" fill="none" stroke="#6B7480" stroke-width="1.2" stroke-dasharray="5 5" opacity=".6"></path>
+        <text class="lbl" x="152" y="140">the determination stays human — no model, ever</text>
+      </svg>
+      <figcaption><b>The AI drafted the review queue; a human made the call.</b>
+        Utah County GIS built the whole chain themselves. <b>Nathan Thomas</b> — 2026 UGIC Excellence in GIS Award.</figcaption>
+    </figure>
+  </section>
+
+  <!-- ═══ 5 · UTAH COUNTY NUMBERS ═══ -->
+  <section class="slide" data-slide="5">
+    <div class="eyebrow"><span>Utah County · what it bought</span><span class="no">05 / 07</span></div>
+    <h2>56,993 properties. <em>86% never visited.</em></h2>
+    <div class="tiles">
+      <div class="tile">
+        <div class="n">56,993</div>
+        <div class="l">parcels approaching reassessment, triaged by the model</div>
+      </div>
+      <div class="tile hot">
+        <div class="n">86<small>%</small></div>
+        <div class="l">strong matches — 48,846 parcels <b>ruled out</b> of further review</div>
+      </div>
+      <div class="tile">
+        <div class="n">7,494</div>
+        <div class="l">flagged yellow — discrepancy worth a desk review</div>
+      </div>
+      <div class="tile">
+        <div class="n">653</div>
+        <div class="l">high-priority candidates for a field inspection</div>
+      </div>
+    </div>
+    <div class="wide-tiles">
+      <div class="panel" style="display:flex; align-items:center; gap:1.6cqw;">
+        <div class="n" style="font-size:3.6cqw; font-weight:900; color:var(--accent); font-variant-numeric:tabular-nums;">$160K<small style="font-size:1.6cqw; color:var(--muted); font-weight:700; margin-left:.2cqw;">/yr</small></div>
+        <div class="l" style="font-size:1.3cqw; color:var(--muted); line-height:1.45;">outsourced verification work <b style="color:var(--fg)">eliminated</b> — and staff time shifted from hunting for changes to making valuation decisions.</div>
+      </div>
+      <div class="panel">
+        <p style="font-size:1.2cqw; line-height:1.5; color:var(--muted);">Context: Utah’s <b style="color:var(--fg)">5-year state-mandated reassessment cycle</b> over 284,000+ parcels — manual inspection of everything is impossible. Source: Esri case study; UGIC 2026 award.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 6 · SPECTRUM ═══ -->
+  <section class="slide" data-slide="6">
+    <div class="eyebrow"><span>The question — where should the LLM sit?</span><span class="no">06 / 07</span></div>
+    <h2>Good at language. Bad at math. <em>So place it.</em></h2>
+    <div class="spectrum-bracket">
+      <div class="llm-brace pending" data-build="2" style="left:0%; width:38.4%;"><span>the LLM may work here</span></div>
+      <div class="llm-brace pending" data-build="2" style="left:61.6%; width:18.6%;"><span>&nbsp;and here&nbsp;</span></div>
+    </div>
+    <div class="spectrum">
+      <div class="station llm pending" data-build="2">
+        <span class="tag">Zone 1 · outside</span>
+        <span class="name">Read the documents</span>
+        <span class="desc">state schema, data dictionaries, policy PDFs → gap reports, checklists</span>
+        <span class="who">no data touched</span>
+      </div>
+      <div class="station llm pending" data-build="3">
+        <span class="tag">Zone 2 · input edge</span>
+        <span class="name">Draft the checks</span>
+        <span class="desc">English → candidate Arcade / SQL; text &amp; address QC; human reviews and owns it</span>
+        <span class="who">code is reviewed first</span>
+      </div>
+      <div class="station core">
+        <span class="tag" style="color:var(--fg)">THE MIDDLE</span>
+        <span class="name">Data + deterministic checks</span>
+        <span class="desc">geometry, area math, topology, duplicates, thresholds — proven, reproducible</span>
+        <span class="stamp pending" data-build="5">NEVER</span>
+      </div>
+      <div class="station llm pending" data-build="4">
+        <span class="tag">Zone 4 · output edge</span>
+        <span class="name">Explain the findings</span>
+        <span class="desc">triage memos from verified findings; per-finding notes for reviewers</span>
+        <span class="who">advisory only — facts above the prose</span>
+      </div>
+      <div class="station">
+        <span class="tag">Zone 5 · always</span>
+        <span class="name">Humans decide</span>
+        <span class="desc">accept, reject, route to the recorder — sign-off is a person’s</span>
+        <span class="who">every time</span>
+      </div>
+    </div>
+    <div class="verdict pending" data-build="6">Zone 1, 2 and 4 are <strong>work, not worship</strong>. The middle never moves — same shape as Utah County’s CV model: <strong>AI drafts the queue, the check proves it, a human decides.</strong></div>
+  </section>
+
+  <!-- ═══ 7 · WEB MERCATOR TRAP ═══ -->
+  <section class="slide" data-slide="7">
+    <div class="eyebrow"><span>Beat 1 · a check the LLM must never do</span><span class="no">07 / 07</span></div>
+    <h2>The LLM can <em>name</em> this trap. It must never <em>do</em> the math.</h2>
+    <div class="chartwrap">
+      <div>
+        <p style="font-size:1.3cqw; color:var(--muted); line-height:1.45; margin-bottom:1.4cqw;">Parcel area, Kanarraville demo subset (508 rows), indexed to the equal-area projection:</p>
+        <div class="barrow">
+          <div class="barlabel">EPSG:5070 <small>ALBERS · EQUAL-AREA</small></div>
+          <div class="bartrack"><div class="barfill base" style="width:62.8%"></div><span class="barval" style="left:calc(62.8% + 1cqw)">100</span></div>
+        </div>
+        <div class="barrow">
+          <div class="barlabel">EPSG:3857 <small>WEB MERCATOR · NATIVE CRS</small></div>
+          <div class="bartrack"><div class="barfill" style="width:100%"></div><span class="barval" style="left:auto; right:.9cqw; color:var(--bg); font-weight:700;">159.3</span></div>
+        </div>
+        <p class="delta-note">Every acreage compared in the native CRS is <b>+59.3% off the map</b>. Web Mercator is conformal — it keeps angles, not area — and the distortion grows with latitude. <span style="color:var(--faint)">37.6° N is exactly where it bites. Stated-assessment acres are measured against the wrong Earth.</span></p>
+      </div>
+      <div class="rulecard">
+        <div class="rule may">
+          <div class="k">The LLM may</div>
+          <p>know the trap and put it on your checklist — “your native-CRS areas are not defensible; verify in an equal-area projection.” Knowledge like this is free.</p>
+        </div>
+        <div class="rule never">
+          <div class="k">It must never</div>
+          <p>run the arithmetic, reproject, or “fix” an acreage. The LLM flags the <b>possibility</b>; deterministic code in ArcGIS proves the <b>fact</b>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<div class="controls">
+  <button id="prev"  aria-label="Previous slide">‹</button>
+  <button id="next"  aria-label="Next slide">›</button>
+  <button id="fs"    aria-label="Fullscreen">⛶ full</button>
+  <span class="hint">← → navigate · F fullscreen</span>
+  <span class="count" id="count"></span>
+</div>
+
+<script>
+(function () {
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var idx = 0;
+
+  function maxBuild(s) {
+    var m = 1;
+    s.querySelectorAll('[data-build]').forEach(function (el) {
+      m = Math.max(m, parseInt(el.getAttribute('data-build'), 10));
+    });
+    return m;
+  }
+  function curBuild(s)   { return s._build || 1; }
+  function applyBuild(s) {
+    s.querySelectorAll('[data-build]').forEach(function (el) {
+      el.classList.toggle('pending', parseInt(el.getAttribute('data-build'), 10) > curBuild(s));
+    });
+  }
+  function show(i) {
+    idx = Math.max(0, Math.min(slides.length - 1, i));
+    slides.forEach(function (s, j) {
+      var on = j === idx;
+      s.style.opacity = on ? 1 : 0;
+      s.style.pointerEvents = on ? 'auto' : 'none';
+      s.style.visibility = on ? 'visible' : 'hidden';
+      if (on) applyBuild(s);
+    });
+    document.getElementById('count').textContent = (idx + 1) + ' / ' + slides.length;
+    document.getElementById('prev').disabled = idx === 0;
+    document.getElementById('next').disabled = idx === slides.length - 1;
+  }
+  function next(ev) {
+    var s = slides[idx];
+    if (curBuild(s) < maxBuild(s)) { s._build = curBuild(s) + 1; applyBuild(s); return; }
+    show(idx + 1);
+  }
+  function prev() {
+    var s = slides[idx];
+    if (curBuild(s) > 1) { s._build = curBuild(s) - 1; applyBuild(s); return; }
+    show(idx - 1);
+  }
+
+  document.getElementById('next').addEventListener('click', next);
+  document.getElementById('prev').addEventListener('click', prev);
+  document.getElementById('stage').addEventListener('click', next);
+
+  document.getElementById('fs').addEventListener('click', function () {
+    var el = document.documentElement;
+    try { (document.fullscreenElement ? document.exitFullscreen() : el.requestFullscreen()); } catch (e) {}
+  });
+
+  window.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); next(); }
+    else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); prev(); }
+    else if (e.key === 'Home') { show(0); }
+    else if (e.key === 'End') { show(slides.length - 1); }
+    else if (e.key === 'f' || e.key === 'F') { document.getElementById('fs').click(); }
+  });
+
+  show(0);
+})();
+</script>
